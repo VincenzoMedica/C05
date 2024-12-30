@@ -21,7 +21,7 @@ MedConnect is a web app for medical bookings, is produced for the Software Engin
 
 * **Cusati Daniel**      - *Developer*   - [d-4n13l](https://github.com/d-4n13l)
 * **Medica Vincenzo**    - *Developer*         - [VincenzoMedica](https://github.com/VincenzoMedica)
-* **Varone Giuseppe**    - *Developer*         - [vipenti](https://github.com/vipenti)
+* **Varone Giuseppe**    - *Developer*         - [v4r0p3pp5](https://github.com/v4r0p3pp5)
 
 
 ## Documentation
