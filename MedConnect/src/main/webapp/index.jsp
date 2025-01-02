@@ -1,12 +1,24 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session="true" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Hello World</title>
+  <title>JSP - Stato Login</title>
 </head>
 <body>
-<h1><%= "Hello World!" %></h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="login.jsp">Login</a>
+
+<%-- Controllo se l'utente è loggato --%>
+<c:choose>
+  <c:when test="${not empty sessionScope.utente}">
+    <p>Benvenuto, <strong>${sessionScope.utente.email}</strong>!</p>
+  </c:when>
+  <c:otherwise>
+    <p>Non sei loggato. </p>
+  </c:otherwise>
+</c:choose>
+
 </body>
 </html>
