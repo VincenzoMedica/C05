@@ -34,39 +34,48 @@
         <main>
             <%
                 ArrayList<Prenotazione> prenotaziones = (ArrayList<Prenotazione>) request.getAttribute("prenotaziones");
+                ArrayList<Boolean> esistenaRecensionePerPrenotazione = (ArrayList<Boolean>) request.getAttribute("esistenaRecensionePerPrenotazione");
 
                 if (prenotaziones == null || prenotaziones.isEmpty()) { %>
-                    <p>Non ci sono ordini.</p>
+                    <p>Non ci sono prenotazioni.</p>
                     <%
-                } else { %>
-                    <p class="posizione-text-center">Numero di prenotazioni: <%= prenotaziones.size() %></p>
-                    <br>
-                    <%
-                }
-                for (Prenotazione prenotazione : prenotaziones) {
-                    %>
-
-                    <p>
-                    <h3><b>
-                        Id: <%= prenotazione.getId_prenotazione() %></b><br>
-                        Stato: <%= prenotazione.getStato() %> <br>
-                        Nota: <%= prenotazione.getNota() %> <br>
+                } else {
+                    if (esistenaRecensionePerPrenotazione == null || esistenaRecensionePerPrenotazione.isEmpty()) { %>
+                        <p>Errore, non e' stato possibile individuare la corrispondenza tra recensione e prenotazione.</p>
                         <%
-                        if(prenotazione.getStato().equals("Completata")){
+                    } else{
                         %>
-                            <form action="creazione-inserimento-recensione-servlet" method="post">
-                                <button type="submit" name="idPrenotazione" value="<%=prenotazione.getId_prenotazione()%>">
-                                    Scrivi una recensione
-                                </button>
-                            </form>
+                        <p class="posizione-text-center">Numero di prenotazioni: <%= prenotaziones.size() %></p>
+                        <br>
+                        <%
+                        int indice = 0;
+                        for (Prenotazione prenotazione : prenotaziones) {
+
+                            %>
+
+                            <p>
+                            <h3><b>
+                                Id: <%= prenotazione.getId_prenotazione() %></b><br>
+                                Stato: <%= prenotazione.getStato() %> <br>
+                                Nota: <%= prenotazione.getNota() %> <br>
+                                <%
+                                if(prenotazione.getStato().equals("Completata") && (!esistenaRecensionePerPrenotazione.get(indice))){
+                                    %>
+                                    <form action="creazione-inserimento-recensione-servlet" method="post">
+                                        <button type="submit" name="idPrenotazione" value="<%=prenotazione.getId_prenotazione()%>">
+                                            Scrivi una recensione
+                                        </button>
+                                    </form>
+                                    <%
+                                }%>
+                            </h3>
+                            </p>
                             <%
-
-
-                        }%>
-
-                    </h3>
-                    </p>
-                <%}%>
+                            indice++;
+                        }
+                    }
+                }
+                %>
             <br><br><br>
             <c:choose>
                 <c:when test="${not empty esito}">

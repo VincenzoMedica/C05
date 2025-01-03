@@ -23,14 +23,14 @@ public class PrenotazioniServlet extends HttpServlet {
 
         if(utente != null) {
             ArrayList<Prenotazione> prenotaziones = PrenotazioneDAO.doRetrieveById_utente(utente.getId());
-        /*    ArrayList<ArrayList<RiferimentoArticolo>> riferimentoArticolos = new ArrayList<>();
-            for(Ordine ordine : ordines) {
-                riferimentoArticolos.add(RiferimentoArticoloDAO.doRetrieveById_ordine(ordine.getId_ordine()));
-            }*/
+            ArrayList<Boolean> esistenaRecensionePerPrenotazione = new ArrayList<>();
+            for(Prenotazione prenotazione : prenotaziones){
+                esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId_prenotazione()));
+            }
 
             request.setAttribute("prenotaziones", prenotaziones);
-            /*request.setAttribute("riferimentoArticolos", riferimentoArticolos);
-*/
+            request.setAttribute("esistenaRecensionePerPrenotazione", esistenaRecensionePerPrenotazione);
+
             indirizzo = "/WEB-INF/common/prenotazioni.jsp";
 
         }else{
