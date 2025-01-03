@@ -9,12 +9,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html><html lang="it">
 <head>
 
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/stylesForm.css">
+
 
    <!--
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> è utilizzato per
@@ -42,7 +42,20 @@
                 <input type="submit" value="Login">
 
             </form>
-                                <br><br><br>
+            <br><br><br>
+            <c:choose>
+                <c:when test="${not empty esito}">
+                    <p>
+                    <h4><c:out value="${esito}" /></h4>
+                    </p>
+                </c:when>
+                <c:otherwise>
+                    <p>
+                        &nbsp;
+                    </p>
+                </c:otherwise>
+            </c:choose>
+
 
 
 
