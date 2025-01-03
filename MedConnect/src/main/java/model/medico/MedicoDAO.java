@@ -60,15 +60,32 @@ public class MedicoDAO {
     public List<Medico> doRetrieve(String ruoloNome, String citta) {
         try (Connection con = ConPool.getConnection()) {
             List<Medico> medicoList = new ArrayList<>();
-            PreparedStatement ps =
-                    con.prepareStatement("select m.*, u.email, u.nome, u.cognome, u.biografia, u.data_nascita, u.luogo_nascita, u.num_cellulare, u.genere\n" +
-                            "    from medico m\n" +
-                            "        inner join utenteregistrato u on m.ID = u.ID\n" +
-                            "    where (m.Ruolo like ? OR u.nome like ? OR u.cognome like ?) AND m.citta like ?;");
-            ps.setString(1, '%'+ruoloNome+'%');
-            ps.setString(2, '%'+ruoloNome+'%');
-            ps.setString(3, '%'+ruoloNome+'%');
-            ps.setString(4, '%'+citta+'%');
+
+            // Dividi ruoloNome in parole chiave
+            String[] keywords = ruoloNome.split("\\s+");
+            StringBuilder queryBuilder = new StringBuilder(
+                    "select m.*, u.email, u.nome, u.cognome, u.biografia, u.data_nascita, u.luogo_nascita, u.num_cellulare, u.genere " +
+                            "from medico m " +
+                            "inner join utenteregistrato u on m.ID = u.ID " +
+                            "where m.citta like ? "
+            );
+
+            // Aggiungi condizioni per ogni parola chiave
+            for (int i = 0; i < keywords.length; i++) {
+                queryBuilder.append("AND (m.Ruolo like ? OR u.nome like ? OR u.cognome like ?) ");
+            }
+
+            PreparedStatement ps = con.prepareStatement(queryBuilder.toString());
+
+            // Imposta i parametri della query
+            ps.setString(1, '%' + citta + '%');
+            int paramIndex = 2;
+            for (String keyword : keywords) {
+                ps.setString(paramIndex++, '%' + keyword + '%'); // m.Ruolo
+                ps.setString(paramIndex++, '%' + keyword + '%'); // u.nome
+                ps.setString(paramIndex++, '%' + keyword + '%'); // u.cognome
+            }
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Medico m = new Medico();
