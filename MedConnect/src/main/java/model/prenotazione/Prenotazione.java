@@ -15,6 +15,14 @@ public class Prenotazione {
         this.idDisponibilita = idDisponibilita;
     }
 
+    public Prenotazione(int id_prenotazione, String stato, String nota, int id_paziente, int id_disponibilita) {
+        this.id = id_prenotazione;
+        this.stato = stato;
+        this.nota = nota;
+        this.idPaziente = id_paziente;
+        this.idDisponibilita = id_disponibilita;
+    }
+
     public int getId() {
         return id;
     }

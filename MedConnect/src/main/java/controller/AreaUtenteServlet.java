@@ -7,9 +7,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.Prenotazione;
-import model.PrenotazioneDAO;
-import model.Utente;
+import model.prenotazione.Prenotazione;
+import model.prenotazione.PrenotazioneDAO;
+import model.utente.Utente;
 
 import java.io.IOException;
 import java.io.PrintWriter;

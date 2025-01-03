@@ -1,4 +1,4 @@
-package model;
+package model.recensione;
 
 public class Recensione {
     private int id_recensione;

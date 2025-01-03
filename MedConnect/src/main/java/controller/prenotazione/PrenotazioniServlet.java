@@ -7,7 +7,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import model.*;
+import model.prenotazione.Prenotazione;
+import model.prenotazione.PrenotazioneDAO;
+import model.recensione.RecensioneDAO;
+import model.utente.Utente;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +28,7 @@ public class PrenotazioniServlet extends HttpServlet {
             ArrayList<Prenotazione> prenotaziones = PrenotazioneDAO.doRetrieveById_utente(utente.getId());
             ArrayList<Boolean> esistenaRecensionePerPrenotazione = new ArrayList<>();
             for(Prenotazione prenotazione : prenotaziones){
-                esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId_prenotazione()));
+                esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId()));
             }
 
             request.setAttribute("prenotaziones", prenotaziones);

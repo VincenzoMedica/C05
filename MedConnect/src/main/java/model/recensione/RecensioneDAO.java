@@ -1,11 +1,11 @@
-package model;
+package model.recensione;
+
+import model.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class RecensioneDAO {
 

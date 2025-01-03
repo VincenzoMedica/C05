@@ -1,4 +1,4 @@
-<%@ page import="model.Prenotazione" %>
+<%@ page import="model.prenotazione.Prenotazione" %>
 <%@ page import="java.util.ArrayList" %>
 
 
@@ -55,14 +55,14 @@
 
                             <p>
                             <h3><b>
-                                Id: <%= prenotazione.getId_prenotazione() %></b><br>
+                                Id: <%= prenotazione.getId() %></b><br>
                                 Stato: <%= prenotazione.getStato() %> <br>
                                 Nota: <%= prenotazione.getNota() %> <br>
                                 <%
                                 if(prenotazione.getStato().equals("Completata") && (!esistenaRecensionePerPrenotazione.get(indice))){
                                     %>
                                     <form action="creazione-inserimento-recensione-servlet" method="post">
-                                        <button type="submit" name="idPrenotazione" value="<%=prenotazione.getId_prenotazione()%>">
+                                        <button type="submit" name="idPrenotazione" value="<%=prenotazione.getId()%>">
                                             Scrivi una recensione
                                         </button>
                                     </form>
