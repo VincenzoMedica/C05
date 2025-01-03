@@ -16,37 +16,30 @@ public class PrenotazioneDAO {
         try (Connection con = ConPool.getConnection()) {
 
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT id_prenotazione, id_prenotazione, stato, nota, id_paziente, id_disponibilita " +
+                    "SELECT id_prenotazione, stato, nota, id_paziente, id_disponibilita " +
                         "FROM Prenotazione " +
-                        "WHERE ID_paziente = ? ");
+                        "WHERE id_paziente = ?");
             ps.setInt(1, id_utente);
             ResultSet rs = ps.executeQuery();
 
-            ArrayList<Prenotazione> ordines = new ArrayList<>();
+            ArrayList<Prenotazione> prenotazioni = new ArrayList<>();
             while (rs.next()) {
                 Prenotazione prenotazione = new Prenotazione();
                 prenotazione.setId_prenotazione(Integer.parseInt(rs.getString("id_prenotazione")));
-                ordine.setPrezzo_totale(Double.parseDouble(rs.getString("prezzo_totale")));
-                ordine.setVia(rs.getString("via"));
-                ordine.setCivico(rs.getString("civico"));
-                ordine.setCitta(rs.getString("citta"));
+                prenotazione.setStato(rs.getString("stato"));
+                prenotazione.setNota(rs.getString("nota"));
+                prenotazione.setId_paziente(Integer.parseInt(rs.getString("id_paziente")));
+                prenotazione.setId_disponibilita(Integer.parseInt(rs.getString("id_disponibilita")));
 
-                //Estrae la data e la trasforma in un'istanza di GregorianCalendar
-                Date dataNascitaSql = rs.getDate("data");
-                Date dataNascitaJava = new Date(dataNascitaSql.getTime());
-                GregorianCalendar gregorianCalendar = new GregorianCalendar();
-                gregorianCalendar.setTime(dataNascitaJava);
-                ordine.setData(gregorianCalendar);
 
-                ordine.setId_utenete(rs.getInt("id_utente"));
-                ordines.add(ordine);
+                prenotazioni.add(prenotazione);
             }
-            return ordines;
+            return prenotazioni;
 
         } catch (SQLException s) {
-
             throw new RuntimeException(s);
         }
     }
+
 
 }

@@ -5,16 +5,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JSP - Stato Login</title>
+  <title>MedConnect</title>
 </head>
 <body>
-C
-<a href="common/areaUtente.jsp">AreaUtente</a>
+<a href="login.jsp">Login</a>
+
 <%-- Controllo se l'utente è loggato --%>
 <c:choose>
   <c:when test="${not empty sessionScope.utente}">
     <p>Benvenuto, <strong>${sessionScope.utente.email}</strong>!</p>
-
+    <a href="area-utente-servlet">AreaUtente</a>
   </c:when>
   <c:otherwise>
     <p>Non sei loggato. </p>

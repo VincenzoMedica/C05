@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet(name = "prenotazioni-servlet", value="/prenotazioni-servlet")
-public class Prenotazioniservlet extends HttpServlet {
+public class PrenotazioniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String indirizzo;
@@ -32,7 +32,6 @@ public class Prenotazioniservlet extends HttpServlet {
             /*request.setAttribute("riferimentoArticolos", riferimentoArticolos);
 */
             indirizzo = "/WEB-INF/common/prenotazioni.jsp";
-
 
         }else{
             indirizzo = "/login.jsp";

@@ -9,13 +9,13 @@ public class Prenotazione {
     private int id_prenotazione;
     private String stato;
     private String nota;
-    private String id_paziente;
-    private String id_disponibilita;
+    private int id_paziente;
+    private int id_disponibilita;
 
     public Prenotazione() {
     }
 
-    public Prenotazione(int id_prenotazione, String stato, String nota, String id_paziente, String id_disponibilita) {
+    public Prenotazione(int id_prenotazione, String stato, String nota, int id_paziente, int id_disponibilita) {
         this.id_prenotazione = id_prenotazione;
         this.stato = stato;
         this.nota = nota;
@@ -47,19 +47,19 @@ public class Prenotazione {
         this.nota = nota;
     }
 
-    public String getId_paziente() {
+    public int getId_paziente() {
         return id_paziente;
     }
 
-    public void setId_paziente(String id_paziente) {
+    public void setId_paziente(int id_paziente) {
         this.id_paziente = id_paziente;
     }
 
-    public String getId_disponibilita() {
+    public int getId_disponibilita() {
         return id_disponibilita;
     }
 
-    public void setId_disponibilita(String id_disponibilita) {
+    public void setId_disponibilita(int id_disponibilita) {
         this.id_disponibilita = id_disponibilita;
     }
 }
