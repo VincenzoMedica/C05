@@ -14,6 +14,16 @@
 <c:choose>
   <c:when test="${not empty sessionScope.utente}">
     <p>Benvenuto, <strong>${sessionScope.utente.email}</strong>!</p>
+
+    <%--  search medico  --%>
+    <form action="search-medico">
+      <label for="ruoloNome"> Ruolo/Nome </label>
+      <input type="text" id="ruoloNome" name="ruoloNome" placeholder="es. Oculista Mario Rossi">
+      <label for="citta"> Città </label>
+      <input type="text" id="citta" name="citta" placeholder="es. Napoli">
+      <input type="submit" value="Ricerca">
+    </form>
+
   </c:when>
   <c:otherwise>
     <p>Non sei loggato. </p>

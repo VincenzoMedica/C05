@@ -1,4 +1,6 @@
-package model;
+package model.utente;
+
+import model.ConPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +10,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class UtenteDAO {
-
 
     public Utente doRetrieveByUsernamePassword(String email, String password) {
 
