@@ -8,12 +8,13 @@
   <title>JSP - Stato Login</title>
 </head>
 <body>
-<a href="login.jsp">Login</a>
-
+C
+<a href="common/areaUtente.jsp">AreaUtente</a>
 <%-- Controllo se l'utente è loggato --%>
 <c:choose>
   <c:when test="${not empty sessionScope.utente}">
     <p>Benvenuto, <strong>${sessionScope.utente.email}</strong>!</p>
+
   </c:when>
   <c:otherwise>
     <p>Non sei loggato. </p>
