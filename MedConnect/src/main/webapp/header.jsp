@@ -25,7 +25,14 @@
         <a href="">FAQ</a>
         <a href="prenotazioni-servlet">Le mie prenotazioni</a>
         <a href="">Le mie recensioni</a>
-        <a href="login.jsp">Login</a>
+        <c:choose>
+            <c:when test="${not empty sessionScope.utente}">
+
+            </c:when>
+            <c:otherwise>
+                <a href="login.jsp">Login</a>
+            </c:otherwise>
+        </c:choose>
     </div>
 </div>
 
