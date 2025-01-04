@@ -185,3 +185,53 @@ hr {
     padding-top: 8px;
     padding-bottom: 8px;
 }
+
+.lista_medici {
+    align-self: center;
+    background-color: #008080;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+.lista_medici h1 {
+    align-self: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.lista_medici ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.lista_medici li {
+    background-color: #66B2B2;
+    padding-left: 8px;
+    cursor: pointer;
+    color: black;
+    border: 1px solid #66B2B2;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.lista_medici li:hover {
+    background-color: #004C4C;
+    color: #B2D8D8;
+}
+
+.lista_medici li h2 {
+    margin-bottom: 0px;
+    padding-top: 2px;
+}
+
+.lista_medici li h3 {
+    margin-top: 0px;
+    padding-bottom: 2px;
+}
