@@ -64,9 +64,9 @@ VALUES
 (1, 'Da Completare', 'Visita di controllo annuale', 1, 1),
 (2, 'Completata', 'Paziente impossibilitato', 3, 2),
 (3, 'Da Completare', 'Prima visita di controllo', 4, 3),
-(4, 'Completare', 'Visita di controllo annuale', 1, 4),
+(4, 'Completata', 'Visita di controllo annuale', 1, 4),
 (5, 'Completata', 'Paziente impossibilitato', 1, 5),
-(6, 'Completare', 'Prima visita di controllo', 1, 6);
+(6, 'Completata', 'Prima visita di controllo', 1, 6);
 
 -- Popolamento della tabella Recensione
 INSERT INTO Recensione (ID_recensione, ID_prenotazione, ID_medico, ID_paziente, nota, stelle)
