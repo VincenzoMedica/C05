@@ -10,9 +10,7 @@
 --%>
 
 <html>
-<head>
-    <title>Title</title>
-</head>
+
 <body>
 
 <div class="header">
