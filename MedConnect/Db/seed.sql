@@ -54,7 +54,10 @@ VALUES
 (5, '2024-06-04', '09:00:00', '10:30:00', 7),
 (6, '2024-06-02', '08:00:00', '09:00:00', 11),
 (7, '2024-06-02', '09:00:00', '10:00:00', 11),
-(8, '2024-06-02', '10:00:00', '11:00:00', 11);
+(8, '2024-06-02', '10:00:00', '11:00:00', 11),
+(9, '2024-06-04', '09:00:00', '10:30:00', 7),
+(10, '2024-06-04', '09:00:00', '10:30:00', 7),
+(11, '2024-06-04', '09:00:00', '10:30:00', 7);
 
 -- Popolamento della tabella Prenotazione
 INSERT INTO Prenotazione (ID_prenotazione, stato, nota, ID_paziente, ID_disponibilita)
@@ -62,7 +65,10 @@ VALUES
 (1, 'Da Completare', 'Visita di controllo annuale', 1, 1),
 (2, 'Completata', 'Paziente impossibilitato', 1, 2),
 (3, 'Completare', 'Prima visita di controllo', 1, 3),
-(4, 'Da Completare', 'Prima visita di controllo', 3, 4);
+(4, 'Da Completare', 'Prima visita di controllo', 3, 4),
+(5, 'Completare', 'Prima visita di controllo', 1, 5),
+(6, 'Completare', 'Prima visita di controllo', 1, 6),
+(7, 'Completare', 'Prima visita di controllo', 1, 7);
 
 -- Popolamento della tabella Recensione
 INSERT INTO Recensione (ID_recensione, ID_prenotazione, ID_medico, ID_paziente, nota, stelle)
