@@ -29,7 +29,7 @@ public class PrenotazioneDAO {
         }
     }
 
-    public static void doRetrieveByIdUtente(int idUtente, ArrayList<Prenotazione> prenotaziones, ArrayList<Disponibilita> disponibilitas, ArrayList<Medico> medicos) {
+    public static boolean doRetrieveByIdUtente(int idUtente, ArrayList<Prenotazione> prenotaziones, ArrayList<Disponibilita> disponibilitas, ArrayList<Medico> medicos) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "SELECT DISTINCT P.id_prenotazione, P.stato, P.nota, P.id_paziente, P.id_disponibilita, " +
@@ -44,8 +44,6 @@ public class PrenotazioneDAO {
 
             ps.setInt(1, idUtente);
             ResultSet rs = ps.executeQuery();
-
-            ArrayList<Prenotazione> prenotazioni = new ArrayList<>();
 
             while (rs.next()) {
                 // Creazione dell'oggetto Disponibilita
@@ -73,13 +71,12 @@ public class PrenotazioneDAO {
                 medicos.add(medico);
                 // Creazione dell'oggetto Prenotazione
                 Prenotazione prenotazione = new Prenotazione();
-                prenotazione.setId(rs.getInt("id_prenotazione"));
-                prenotazione.setStato(rs.getString("stato"));
-                prenotazione.setNota(rs.getString("nota"));
-                prenotazione.setIdPaziente(rs.getInt("id_paziente"));
-
-                prenotaziones.add(prenotazione);
+                if(prenotazione.setId(rs.getInt("id_prenotazione")) && prenotazione.setStato(rs.getString("stato")) && prenotazione.setNota(rs.getString("nota")) && prenotazione.setIdPaziente(rs.getInt("id_paziente")))
+                    prenotaziones.add(prenotazione);
+                else
+                    return false;
             }
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException("Errore durante il recupero delle prenotazioni", e);
         }

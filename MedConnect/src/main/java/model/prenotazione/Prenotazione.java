@@ -1,5 +1,7 @@
 package model.prenotazione;
 
+import java.util.regex.Pattern;
+
 public class Prenotazione {
     private int id;
     private String stato;
@@ -7,60 +9,64 @@ public class Prenotazione {
     private int idPaziente;
     private int idDisponibilita;
 
-    public Prenotazione() {}
-
-    public Prenotazione(String nota, int idPaziente, int idDisponibilita) {
-        this.nota = nota;
-        this.idPaziente = idPaziente;
-        this.idDisponibilita = idDisponibilita;
-    }
-
-    public Prenotazione(int id_prenotazione, String stato, String nota, int id_paziente, int id_disponibilita) {
-        this.id = id_prenotazione;
-        this.stato = stato;
-        this.nota = nota;
-        this.idPaziente = id_paziente;
-        this.idDisponibilita = id_disponibilita;
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public boolean setId(int id) {
+        if (Pattern.compile("^\\d+$").matcher(String.valueOf(id)).matches()) {
+            this.id = id;
+            return true;
+        }
+        else return false;
     }
 
     public String getStato() {
         return stato;
     }
 
-    public void setStato(String stato) {
-        this.stato = stato;
+    public boolean setStato(String stato) {
+        if(stato != null && Pattern.compile("^(Da Completare|Completato)$").matcher(stato).matches()) {
+            this.stato = stato;
+            return true;
+        }
+        else return false;
     }
 
     public String getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
-        this.nota = nota;
+    public boolean setNota(String nota) {
+        if (nota != null && Pattern.compile("^.{0,255}$").matcher(nota).matches()) {
+            this.nota = nota;
+            return true;
+        }
+        return false;
     }
 
     public int getIdPaziente() {
         return idPaziente;
     }
 
-    public void setIdPaziente(int idPaziente) {
-        this.idPaziente = idPaziente;
+    public boolean setIdPaziente(int idPaziente) {
+        if (Pattern.compile("^\\d+$").matcher(String.valueOf(idPaziente)).matches()) {
+            this.idPaziente = idPaziente;
+            return true;
+        }
+        else return false;
     }
 
     public int getIdDisponibilita() {
         return idDisponibilita;
     }
 
-    public void setIdDisponibilita(int idDisponibilita) {
-        this.idDisponibilita = idDisponibilita;
+    public boolean setIdDisponibilita(int idDisponibilita) {
+        if (Pattern.compile("^\\d+$").matcher(String.valueOf(idDisponibilita)).matches()) {
+            this.idDisponibilita = idDisponibilita;
+            return true;
+        }
+        else return false;
     }
 
     @Override

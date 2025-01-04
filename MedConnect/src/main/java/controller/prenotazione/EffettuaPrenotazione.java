@@ -22,19 +22,31 @@ public class EffettuaPrenotazione extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Prenotazione prenotazione = new Prenotazione(request.getParameter("nota"), Integer.parseInt(request.getParameter("idPaziente")), Integer.parseInt(request.getParameter("idDisponibilita")));
+        String nota = request.getParameter("nota");
+        int idPaziente = Integer.parseInt(request.getParameter("idPaziente"));
+        int idDisponibilita = Integer.parseInt(request.getParameter("idDisponibilita"));
 
-        if(PrenotazioneDAO.doSave(prenotazione) != -1)
-        {
-            request.setAttribute("message", "Prenotazione salvata con successo.");
-            String address = "/WEB-INF/results/success.jsp";
+        Prenotazione prenotazione = new Prenotazione();
 
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher(address);
-            dispatcher.forward(request, response);
+        if (prenotazione.setNota(nota) && prenotazione.setIdPaziente(idPaziente) && prenotazione.setIdDisponibilita(idDisponibilita)) {
+            if (PrenotazioneDAO.doSave(prenotazione) != -1) {
+                request.setAttribute("message", "Prenotazione salvata con successo.");
+                String address = "/WEB-INF/results/success.jsp";
+
+                RequestDispatcher dispatcher =
+                        request.getRequestDispatcher(address);
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("message", "Errore durante la creazione della prenotazione.");
+                String address = "/WEB-INF/results/error.jsp";
+
+                RequestDispatcher dispatcher =
+                        request.getRequestDispatcher(address);
+                dispatcher.forward(request, response);
+            }
         }
         else {
-            request.setAttribute("message", "Errore durante la creazione della prenotazione.");
+            request.setAttribute("message", "Errore nei parametri.");
             String address = "/WEB-INF/results/error.jsp";
 
             RequestDispatcher dispatcher =
