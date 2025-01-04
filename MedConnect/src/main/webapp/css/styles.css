@@ -139,7 +139,7 @@ hr {
     border: none; /* Rimuove il bordo predefinito */
     height: 1px; /* Altezza della linea */
     background-color: #B2D8D8;
-    margin: 20px 0; /* Spaziatura sopra e sotto la linea */
+    margin: 10px 0; /* Spaziatura sopra e sotto la linea */
 }
 
 .lc_bot_register {
@@ -234,4 +234,146 @@ hr {
 .lista_medici li h3 {
     margin-top: 0px;
     padding-bottom: 2px;
+}
+
+.profilo_medico {
+    align-self: center;
+    background-color: #008080;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+.profilo_medico h2 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.profilo_medico p {
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+.medico_biografia h3 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.medico_info h3 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.medico_info ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.disponibilita_medico {
+    display: flex;
+    flex-direction: column;
+}
+
+.disponibilita_medico h3 {
+    align-self: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/* Container per organizzare le disponibilità */
+.availability-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 8px;
+    justify-content: center;
+}
+
+/* Card per ogni disponibilità */
+.availability-card {
+    background-color: #66B2B2; /* Colore di sfondo leggero */
+    border: 1px solid #B2D8D8; /* Bordo sottile */
+    border-radius: 8px; /* Bordo arrotondato */
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Effetto ombra */
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Stile del testo */
+.availability-date {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: black;
+}
+
+.availability-time {
+    color: black;
+}
+
+/* Effetti al passaggio del mouse */
+.availability-card:hover {
+    background-color: #004C4C; /* Colore di sfondo leggero */
+    color: #B2D8D8;
+    transform: translateY(-5px); /* Effetto sollevamento */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Ombra più pronunciata */
+}
+
+.availability-card:hover .availability-date,
+.availability-card:hover .availability-time {
+    color: #B2D8D8; /* Testo bianco */
+}
+
+#dialog {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #008080;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;
+    width: 60%;
+    max-width: 800px;
+    height: 70%;
+    max-height: 600px;
+    overflow-y: auto;
+    border-radius: 10px;
+}
+
+#dialog h3 {
+    text-align: center;
+}
+
+#dialog form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.dialog_content form label {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.dialog_content form textarea {
+    width: 430px;
+    height: 100px;
 }
