@@ -25,6 +25,9 @@ public class MedicoProfile extends HttpServlet {
 
         request.setAttribute("medico", medico);
         request.setAttribute("disponibilitaList", disponibilitaList);
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
         String address = "/WEB-INF/results/medico/medico-profile.jsp";
 
         RequestDispatcher dispatcher =
