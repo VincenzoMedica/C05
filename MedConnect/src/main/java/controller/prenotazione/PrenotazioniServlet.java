@@ -25,7 +25,7 @@ public class PrenotazioniServlet extends HttpServlet {
 
 
         if(utente != null) {
-            ArrayList<Prenotazione> prenotaziones = PrenotazioneDAO.doRetrieveById_utente(utente.getId());
+            ArrayList<Prenotazione> prenotaziones = new PrenotazioneDAO().doRetrieveById_utente(utente.getId());
             ArrayList<Boolean> esistenaRecensionePerPrenotazione = new ArrayList<>();
             for(Prenotazione prenotazione : prenotaziones){
                 esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId()));

@@ -24,7 +24,7 @@ public class EffettuaPrenotazione extends HttpServlet {
 
         Prenotazione prenotazione = new Prenotazione(request.getParameter("nota"), Integer.parseInt(request.getParameter("idPaziente")), Integer.parseInt(request.getParameter("idDisponibilita")));
 
-        if(new PrenotazioneDAO().doSave(prenotazione) != -1)
+        if(PrenotazioneDAO.doSave(prenotazione) != -1)
         {
             request.setAttribute("message", "Prenotazione salvata con successo.");
             String address = "/WEB-INF/results/success.jsp";

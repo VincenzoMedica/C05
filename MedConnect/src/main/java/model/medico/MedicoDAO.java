@@ -38,7 +38,7 @@ public class MedicoDAO {
     }
 
     public Medico doRetrieveById(String id) {
-        try (Connection con = ConPool.getConnection()) {
+        try (Connection con = new ConPool().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("select m.*, u.email, u.nome, u.cognome, u.biografia, u.data_nascita, u.luogo_nascita, u.num_cellulare, u.genere " +
                             "from medico m " +
@@ -58,7 +58,7 @@ public class MedicoDAO {
     }
 
     public List<Medico> doRetrieve(String ruoloNome, String citta) {
-        try (Connection con = ConPool.getConnection()) {
+        try (Connection con = new ConPool().getConnection()) {
             List<Medico> medicoList = new ArrayList<>();
 
             // Dividi ruoloNome in parole chiave
