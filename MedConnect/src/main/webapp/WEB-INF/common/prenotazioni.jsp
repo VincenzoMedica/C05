@@ -1,5 +1,8 @@
 <%@ page import="model.prenotazione.Prenotazione" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.disponibilita.Disponibilita" %>
+<%@ page import="model.medico.Medico" %>
+<%@ page import="model.utente.Utente" %>
 
 
 <%--
@@ -34,6 +37,9 @@
         <main>
             <%
                 ArrayList<Prenotazione> prenotaziones = (ArrayList<Prenotazione>) request.getAttribute("prenotaziones");
+                ArrayList<Disponibilita> disponibilitas = (ArrayList<Disponibilita>) request.getAttribute("disponibilitas");
+                ArrayList<Medico> medicos = (ArrayList<Medico>) request.getAttribute("medicos");
+                ArrayList<Utente> utentes = (ArrayList<Utente>) request.getAttribute("utentes");
                 ArrayList<Boolean> esistenaRecensionePerPrenotazione = (ArrayList<Boolean>) request.getAttribute("esistenaRecensionePerPrenotazione");
 
                 if (prenotaziones == null || prenotaziones.isEmpty()) { %>
@@ -58,6 +64,22 @@
                                 Id: <%= prenotazione.getId() %></b><br>
                                 Stato: <%= prenotazione.getStato() %> <br>
                                 Nota: <%= prenotazione.getNota() %> <br>
+
+                                Data: <%= disponibilitas.get(indice).getData() %> <br>
+                                Ora Inizio: <%= disponibilitas.get(indice).getOraIn() %> <br>
+                                Ora Fine: <%= disponibilitas.get(indice).getOraFi() %> <br>
+
+
+                                Nome: <%= medicos.get(indice).getNome() %> <br>
+                                Cognome: <%= medicos.get(indice).getCognome() %> <br>
+
+
+                                Via: <%= medicos.get(indice).getVia() %> <br>
+                                Civico: <%= medicos.get(indice).getCivico() %> <br>
+                                Citta: <%= medicos.get(indice).getCitta() %> <br>
+
+
+
                                 <%
                                 if(prenotazione.getStato().equals("Completata") && (!esistenaRecensionePerPrenotazione.get(indice))){
                                     %>

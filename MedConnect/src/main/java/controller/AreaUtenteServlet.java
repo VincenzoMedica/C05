@@ -28,7 +28,7 @@ public class AreaUtenteServlet extends HttpServlet {
 
 
         if(utente != null) {
-            ArrayList<Prenotazione> prenotaziones = PrenotazioneDAO.doRetrieveById_utente(utente.getId());
+            //ArrayList<Prenotazione> prenotaziones = PrenotazioneDAO.doRetrieveById_utente(utente.getId());
             indirizzo = "/WEB-INF/common/areaUtente.jsp";
         }else{
             indirizzo = "/login.jsp";

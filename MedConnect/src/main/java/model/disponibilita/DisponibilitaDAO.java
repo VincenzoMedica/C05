@@ -1,6 +1,7 @@
 package model.disponibilita;
 
 import model.ConPool;
+import model.prenotazione.Prenotazione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +34,32 @@ public class DisponibilitaDAO {
             return disponibilitaList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public static Disponibilita doRetrieveById_disponibilita(int id_disponibilita) {
+
+        try (Connection con = ConPool.getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement(
+                    "SELECT DISTINCT D.ID_disponibilita, D.data, D.ora_in, D.ora_fi, D.ID_medico\n" +
+                        "FROM disponibilita D\n" +
+                        "WHERE D.ID_disponibilita = ?");
+            ps.setInt(1, id_disponibilita);
+            ResultSet rs = ps.executeQuery();
+
+            Disponibilita disponibilita = new Disponibilita();
+            while (rs.next()) {
+                disponibilita.setId(Integer.parseInt(rs.getString("ID_disponibilita")));
+                disponibilita.setData(rs.getDate("data"));
+                disponibilita.setOraIn(rs.getString("ora_in"));
+                disponibilita.setOraFi(rs.getString("ora_fi"));
+                disponibilita.setIdMedico(Integer.parseInt(rs.getString("ID_medico")));
+            }
+            return disponibilita;
+
+        } catch (SQLException s) {
+            throw new RuntimeException(s);
         }
     }
 }

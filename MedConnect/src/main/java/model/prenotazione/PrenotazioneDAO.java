@@ -1,6 +1,9 @@
 package model.prenotazione;
 
 import model.ConPool;
+import model.disponibilita.Disponibilita;
+import model.medico.Medico;
+import model.utente.Utente;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -26,34 +29,61 @@ public class PrenotazioneDAO {
         }
     }
 
-    public static ArrayList<Prenotazione> doRetrieveById_utente(int id_utente) {
-
+    public static void doRetrieveByIdUtente(int idUtente, ArrayList<Prenotazione> prenotaziones, ArrayList<Disponibilita> disponibilitas, ArrayList<Medico> medicos) {
         try (Connection con = ConPool.getConnection()) {
-
             PreparedStatement ps = con.prepareStatement(
-                    "SELECT id_prenotazione, stato, nota, id_paziente, id_disponibilita " +
-                            "FROM Prenotazione " +
-                            "WHERE id_paziente = ?");
-            ps.setInt(1, id_utente);
+                    "SELECT DISTINCT P.id_prenotazione, P.stato, P.nota, P.id_paziente, P.id_disponibilita, " +
+                            "D.ID_disponibilita, D.data, D.ora_in, D.ora_fi, D.ID_medico, " +
+                            "U.ID AS id_utente, U.nome, U.cognome, " +
+                            "M.ID AS id_medico, M.via, M.civico, M.citta " +
+                            "FROM Prenotazione P " +
+                            "JOIN Disponibilita D ON P.ID_disponibilita = D.ID_disponibilita " +
+                            "JOIN Medico M ON D.ID_medico = M.ID " +
+                            "JOIN utenteregistrato U ON M.ID = U.ID " +
+                            "WHERE P.id_paziente = ?");
+
+            ps.setInt(1, idUtente);
             ResultSet rs = ps.executeQuery();
 
             ArrayList<Prenotazione> prenotazioni = new ArrayList<>();
+
             while (rs.next()) {
+                // Creazione dell'oggetto Disponibilita
+                Disponibilita disponibilita = new Disponibilita();
+                disponibilita.setId(rs.getInt("ID_disponibilita"));
+                disponibilita.setData(rs.getDate("data"));
+                disponibilita.setOraIn(rs.getString("ora_in"));
+                disponibilita.setOraFi(rs.getString("ora_fi"));
+                disponibilitas.add(disponibilita);
+
+                // Creazione dell'oggetto Medico
+                Medico medico = new Medico();
+                medico.setId(rs.getInt("id_medico"));
+                medico.setVia(rs.getString("via"));
+                medico.setCivico(rs.getString("civico"));
+                medico.setCitta(rs.getString("citta"));
+
+
+                // Creazione dell'oggetto Utente
+
+                medico.setId(rs.getInt("id_utente"));
+                medico.setNome(rs.getString("nome"));
+                medico.setCognome(rs.getString("cognome"));
+
+                medicos.add(medico);
+                // Creazione dell'oggetto Prenotazione
                 Prenotazione prenotazione = new Prenotazione();
-                prenotazione.setId(Integer.parseInt(rs.getString("id_prenotazione")));
+                prenotazione.setId(rs.getInt("id_prenotazione"));
                 prenotazione.setStato(rs.getString("stato"));
                 prenotazione.setNota(rs.getString("nota"));
-                prenotazione.setIdPaziente(Integer.parseInt(rs.getString("id_paziente")));
-                prenotazione.setIdDisponibilita(Integer.parseInt(rs.getString("id_disponibilita")));
+                prenotazione.setIdPaziente(rs.getInt("id_paziente"));
 
-
-                prenotazioni.add(prenotazione);
+                prenotaziones.add(prenotazione);
             }
-            return prenotazioni;
-
-        } catch (SQLException s) {
-            throw new RuntimeException(s);
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore durante il recupero delle prenotazioni", e);
         }
     }
+
 
 }

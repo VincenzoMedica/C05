@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.disponibilita.Disponibilita;
+import model.disponibilita.DisponibilitaDAO;
+import model.medico.Medico;
 import model.prenotazione.Prenotazione;
 import model.prenotazione.PrenotazioneDAO;
 import model.recensione.RecensioneDAO;
@@ -25,13 +28,22 @@ public class PrenotazioniServlet extends HttpServlet {
 
 
         if(utente != null) {
-            ArrayList<Prenotazione> prenotaziones = PrenotazioneDAO.doRetrieveById_utente(utente.getId());
+            ArrayList<Prenotazione> prenotaziones = new ArrayList<>();
+            ArrayList<Disponibilita> disponibilitas = new ArrayList<>();
+            ArrayList<Medico> medicos = new ArrayList<>();
             ArrayList<Boolean> esistenaRecensionePerPrenotazione = new ArrayList<>();
+
+            PrenotazioneDAO.doRetrieveByIdUtente(utente.getId(), prenotaziones, disponibilitas, medicos);
+
             for(Prenotazione prenotazione : prenotaziones){
+                disponibilitas.add(DisponibilitaDAO.doRetrieveById_disponibilita(prenotazione.getIdDisponibilita()));
                 esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId()));
             }
 
+
             request.setAttribute("prenotaziones", prenotaziones);
+            request.setAttribute("disponibilitas", disponibilitas);
+            request.setAttribute("medicos", medicos);
             request.setAttribute("esistenaRecensionePerPrenotazione", esistenaRecensionePerPrenotazione);
 
             indirizzo = "/WEB-INF/common/prenotazioni.jsp";
