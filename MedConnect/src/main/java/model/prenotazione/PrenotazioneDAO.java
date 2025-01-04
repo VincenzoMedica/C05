@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PrenotazioneDAO {
 
-    public int doSave(Prenotazione prenotazione) {
+    public static int doSave(Prenotazione prenotazione) {
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement(
                     "insert into prenotazione(nota, ID_paziente, ID_disponibilita) values (?,?,?)",
