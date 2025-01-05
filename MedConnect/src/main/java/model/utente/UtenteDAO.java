@@ -9,8 +9,22 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * Classe DAO (Data Access Object) per la gestione delle operazioni relative agli utenti nel database.
+ *
+ * @author [C05]
+ * @version 1.0
+ */
 public class UtenteDAO {
 
+    /**
+     * Recupera un utente dal database utilizzando l'email e la password.
+     *
+     * @param email    L'email dell'utente.
+     * @param password La password dell'utente, non hashata.
+     * @return Un'istanza di {@code Utente} se le credenziali corrispondono; {@code null} altrimenti.
+     * @throws RuntimeException in caso di errori durante l'interazione con il database.
+     */
     public Utente doRetrieveByUsernamePassword(String email, String password) {
 
         PreparedStatement statement = null;
@@ -20,7 +34,7 @@ public class UtenteDAO {
         try (Connection connection = new ConPool().getConnection()) {
             statement = connection.prepareStatement(
                     "SELECT id, nome, cognome, genere, data_nascita, luogo_nascita, email, pass, num_cellulare, cf, biografia\n" +
-                        "FROM utenteregistrato WHERE email=? AND pass=SHA1(?)"
+                            "FROM utenteregistrato WHERE email=? AND pass=SHA1(?)"
             );
             statement.setString(1, email);
             statement.setString(2, password);
@@ -48,7 +62,7 @@ public class UtenteDAO {
                 utente.setCf(resultSet.getString("cf"));
                 utente.setBiografia(resultSet.getString("biografia"));
             }
-        }  catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
             try {

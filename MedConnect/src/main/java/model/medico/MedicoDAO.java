@@ -11,7 +11,23 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+/**
+ * La classe {@code MedicoDAO} gestisce le operazioni di accesso ai dati per gli oggetti {@link Medico}.
+ * Consente di recuperare informazioni sui medici dal database utilizzando vari criteri di ricerca.
+ *
+ * @author [C05]
+ * @version 1.0
+ * @see Medico
+ */
 public class MedicoDAO {
+
+    /**
+     * Popola un oggetto {@code Medico} con i dati recuperati da un {@code ResultSet}.
+     *
+     * @param medico    l'oggetto {@code Medico} da popolare.
+     * @param resultSet il {@code ResultSet} contenente i dati del medico.
+     * @throws SQLException se si verifica un errore durante l'accesso ai dati.
+     */
     private void setMedicoFromDb(Medico medico, ResultSet resultSet) throws SQLException {
         medico.setId(resultSet.getInt(1));
         medico.setRuolo(resultSet.getString(2));
@@ -37,6 +53,13 @@ public class MedicoDAO {
         medico.setGenere(resultSet.getString(14));
     }
 
+    /**
+     * Recupera un medico dal database utilizzando il suo ID.
+     *
+     * @param id l'ID del medico da recuperare.
+     * @return l'oggetto {@code Medico} associato all'ID specificato o {@code null} se non esiste.
+     * @throws RuntimeException se si verifica un errore di accesso al database.
+     */
     public Medico doRetrieveById(String id) {
         try (Connection con = new ConPool().getConnection()) {
             PreparedStatement ps =
@@ -57,6 +80,14 @@ public class MedicoDAO {
         }
     }
 
+    /**
+     * Recupera una lista di medici dal database che corrispondono ai criteri di ricerca specificati.
+     *
+     * @param ruoloNome una stringa contenente il ruolo o il nome del medico come criterio di ricerca.
+     * @param citta     il nome della città in cui cercare i medici.
+     * @return una lista di oggetti {@code Medico} che corrispondono ai criteri di ricerca.
+     * @throws RuntimeException se si verifica un errore di accesso al database.
+     */
     public List<Medico> doRetrieve(String ruoloNome, String citta) {
         try (Connection con = new ConPool().getConnection()) {
             List<Medico> medicoList = new ArrayList<>();

@@ -14,20 +14,26 @@ import model.utente.Utente;
 import java.io.IOException;
 
 /**
- * Servlet per l'inserimento di una nuova recensione associata a una prenotazione.
- * Valida i parametri ricevuti, verifica l'esistenza della sessione utente,
- * controlla che non esista già una recensione per la prenotazione e salva la nuova recensione.
+ * Servlet per l'inserimento di una recensione relativa a una prenotazione.
+ * Gestisce la creazione di una recensione, validando i dati, verificando l'esistenza di recensioni precedenti per la prenotazione
+ * e salvando la recensione nel database.
+ *
+ * @author [C05]
+ * @version 1.0
  */
 @WebServlet(name = "InserimentoRecensioneServlet", value = "/inserimento-recensione-servlet")
 public class InserimentoRecensioneServlet extends HttpServlet {
 
     /**
-     * Gestisce le richieste HTTP POST per l'inserimento di una recensione.
+     * Gestisce la richiesta HTTP POST per l'inserimento di una recensione.
+     * Effettua una serie di validazioni sul formato dell'ID prenotazione, verifica la sessione utente,
+     * controlla se una recensione è già presente per la prenotazione e infine salva la recensione.
+     * Se ci sono errori nei dati inseriti o nella sessione, viene inviata una risposta di errore.
      *
-     * @param request  l'oggetto HttpServletRequest contenente i parametri della richiesta
-     * @param response l'oggetto HttpServletResponse per inviare la risposta al client
-     * @throws ServletException in caso di errori durante la gestione della richiesta
-     * @throws IOException      in caso di errori di input/output
+     * @param request  La richiesta HTTP ricevuta.
+     * @param response La risposta HTTP da inviare.
+     * @throws ServletException Se si verifica un errore nel processo di servlet.
+     * @throws IOException      Se si verifica un errore nella gestione della risposta.
      */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

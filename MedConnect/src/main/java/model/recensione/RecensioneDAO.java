@@ -7,22 +7,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * La classe {@code RecensioneDAO} fornisce metodi per gestire le operazioni
+ * di accesso al database relative alle recensioni, come il salvataggio e la verifica di esistenza.
+ */
 public class RecensioneDAO {
 
     /**
-     * Recupera l'ID del medico associato a una determinata prenotazione.
+     * Recupera l'identificativo del medico associato a una specifica prenotazione.
      *
-     * @param id_prenotazione l'ID della prenotazione da cui ottenere l'ID del medico
-     * @return l'ID del medico se trovato, -1 altrimenti
+     * @param id_prenotazione l'identificativo della prenotazione.
+     * @return l'ID del medico associato se trovato; {@code -1} altrimenti.
      */
     public static int getIdMedicoByPrenotazione(int id_prenotazione) {
         // Prova a stabilire una connessione al database
         try (Connection con = ConPool.getConnection()) {
             // Query per recuperare l'ID del medico
             String query = "SELECT DISTINCT D.id_medico " +
-                            "FROM disponibilita D, prenotazione P " +
-                            "WHERE P.ID_prenotazione = ? " +
-                            "AND D.ID_disponibilita = P.ID_disponibilita";
+                    "FROM disponibilita D, prenotazione P " +
+                    "WHERE P.ID_prenotazione = ? " +
+                    "AND D.ID_disponibilita = P.ID_disponibilita";
 
             // Crea un PreparedStatement per eseguire la query
             try (PreparedStatement ps = con.prepareStatement(query)) {
@@ -47,14 +51,19 @@ public class RecensioneDAO {
         return -1;
     }
 
-
+    /**
+     * Salva una nuova recensione nel database.
+     *
+     * @param recensione l'oggetto {@code Recensione} da salvare.
+     * @return {@code true} se la recensione è stata salvata con successo; {@code false} altrimenti.
+     */
     public static boolean doSave(Recensione recensione) {
 
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO Recensione (ID_prenotazione, ID_medico, ID_paziente, nota, stelle) " +
-                                                            " VALUES (?, ?, ?, ?, ?)");
+                    " VALUES (?, ?, ?, ?, ?)");
             ps.setInt(1, recensione.getId_prenotazione());
-            ps.setInt(2,  recensione.getId_medico());
+            ps.setInt(2, recensione.getId_medico());
             ps.setInt(3, recensione.getId_paziente());
             ps.setString(4, recensione.getNota());
             ps.setInt(5, recensione.getStelle());
@@ -70,13 +79,11 @@ public class RecensioneDAO {
 
     }
 
-
-
     /**
-     * Verifica se esiste già una recensione associata a una prenotazione specifica.
+     * Verifica l'esistenza di una recensione associata a una specifica prenotazione.
      *
-     * @param id_prenotazione l'ID della prenotazione da controllare
-     * @return true se esiste una recensione per la prenotazione, false altrimenti
+     * @param id_prenotazione l'identificativo della prenotazione.
+     * @return {@code true} se esiste una recensione per la prenotazione; {@code false} altrimenti.
      */
     public static boolean existsRecensioneForPrenotazione(int id_prenotazione) {
         // Prova a stabilire una connessione al database
@@ -107,9 +114,6 @@ public class RecensioneDAO {
         // Se non ci sono risultati, ritorna false
         return false;
     }
-
-
-
 }
 
 
