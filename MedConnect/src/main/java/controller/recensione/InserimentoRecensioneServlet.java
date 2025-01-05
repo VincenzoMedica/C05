@@ -98,7 +98,7 @@ public class InserimentoRecensioneServlet extends HttpServlet {
         boolean isValid = true;
 
         if (!recensione.setNota(nota)) {
-            message += "La nota non può essere vuota. ";
+            message += "La nota non è valida. ";
             isValid = false;
         }
 
@@ -124,13 +124,16 @@ public class InserimentoRecensioneServlet extends HttpServlet {
         // Salvataggio recensione
         if (!RecensioneDAO.doSave(recensione)) {
             message = "Inserimento: L'inserimento non ha avuto successo, nessuna riga inserita.";
+            request.setAttribute("esito", message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/error.jsp");
+            dispatcher.forward(request, response);
         } else {
             message = "Inserimento: Inserimento effettuato con successo.";
+            request.setAttribute("message", message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/success.jsp");
+            dispatcher.forward(request, response);
         }
 
-        // Esito finale
-        request.setAttribute("esito", message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("prenotazioni-servlet");
-        dispatcher.forward(request, response);
+
     }
 }

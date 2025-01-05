@@ -58,7 +58,7 @@
 
 <c:choose>
     <c:when test="${not empty esito}">
-        <p>
+        <p id="error-paragraph">
         <h4><c:out value="${esito}"/></h4>
         </p>
     </c:when>
