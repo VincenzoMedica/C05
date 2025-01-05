@@ -26,7 +26,7 @@ public class Prenotazione {
     }
 
     public boolean setStato(String stato) {
-        if(stato != null && Pattern.compile("^(Da Completare|Completato)$").matcher(stato).matches()) {
+        if(stato != null && Pattern.compile("^(Da Completare|Completata)$").matcher(stato).matches()) {
             this.stato = stato;
             return true;
         }

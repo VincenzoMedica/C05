@@ -27,7 +27,9 @@
         <a href="">Le mie recensioni</a>
         <c:choose>
             <c:when test="${not empty sessionScope.utente}">
-
+                <form id="form-logout" action="logout" method="post">
+                    <input type="submit" value="Logout">
+                </form>
             </c:when>
             <c:otherwise>
                 <a href="login.jsp">Login</a>

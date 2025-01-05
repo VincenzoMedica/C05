@@ -50,8 +50,8 @@ public class PrenotazioneTest {
     public void setStatoTestValid() {
         Prenotazione prenotazione = new Prenotazione();
 
-        Assertions.assertTrue(prenotazione.setStato("Completato"));
-        Assertions.assertEquals("Completato", prenotazione.getStato());
+        Assertions.assertTrue(prenotazione.setStato("Completata"));
+        Assertions.assertEquals("Completata", prenotazione.getStato());
     }
 
     @Test
