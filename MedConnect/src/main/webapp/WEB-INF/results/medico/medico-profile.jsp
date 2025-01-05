@@ -72,7 +72,7 @@
             <label>Data: <input type="text" id="dialog-data" name="data" readonly/></label><br>
             <label>Ora Inizio: <input type="text" id="dialog-oraIn" name="oraIn" readonly/></label><br>
             <label>Ora Fine: <input type="text" id="dialog-oraFi" name="oraFi" readonly/></label><br>
-            <label>Nota: <textarea name="nota"
+            <label>Nota: <textarea name="nota" cols="60" rows="5" maxlength="255"
                                    placeholder="Inserisci una nota per la tua prenotazione (max 255 caratteri)."></textarea></label><br>
             <input type="hidden" id="dialog-id" name="idDisponibilita">
             <input type="hidden" name="idPaziente" value="${utente.id}">
