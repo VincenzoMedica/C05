@@ -13,9 +13,22 @@ import model.utente.Utente;
 
 import java.io.IOException;
 
-@WebServlet(name = "inserimento-recensione-servlet", value = "/inserimento-recensione-servlet")
+/**
+ * Servlet per l'inserimento di una nuova recensione associata a una prenotazione.
+ * Valida i parametri ricevuti, verifica l'esistenza della sessione utente,
+ * controlla che non esista già una recensione per la prenotazione e salva la nuova recensione.
+ */
+@WebServlet(name = "InserimentoRecensioneServlet", value = "/inserimento-recensione-servlet")
 public class InserimentoRecensioneServlet extends HttpServlet {
 
+    /**
+     * Gestisce le richieste HTTP POST per l'inserimento di una recensione.
+     *
+     * @param request  l'oggetto HttpServletRequest contenente i parametri della richiesta
+     * @param response l'oggetto HttpServletResponse per inviare la risposta al client
+     * @throws ServletException in caso di errori durante la gestione della richiesta
+     * @throws IOException      in caso di errori di input/output
+     */
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String message = "";
@@ -38,7 +51,7 @@ public class InserimentoRecensioneServlet extends HttpServlet {
         // Recupero sessione utente
         HttpSession session = request.getSession(false);
         if (session == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Sessione non valida.");
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sessione non valida.");
             return;
         }
 
@@ -58,10 +71,16 @@ public class InserimentoRecensioneServlet extends HttpServlet {
             return;
         }
 
-        // Recupero dati recensione
+        // Creazione e validazione della recensione
         Recensione recensione = new Recensione();
-        recensione.setId_prenotazione(idPrenotazione);
-        recensione.setId_paziente(utente.getId());
+        if (!recensione.setId_prenotazione(idPrenotazione)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore: id_prenotazione non valido.");
+            return;
+        }
+        if (!recensione.setId_paziente(utente.getId())) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore: id_paziente non valido.");
+            return;
+        }
 
         int idMedico = RecensioneDAO.getIdMedicoByPrenotazione(idPrenotazione);
         if (idMedico < 1) {
@@ -78,15 +97,15 @@ public class InserimentoRecensioneServlet extends HttpServlet {
         String stelleParam = request.getParameter("stelle");
         boolean isValid = true;
 
-        if (nota == null || nota.trim().isEmpty()) {
+        if (!recensione.setNota(nota)) {
             message += "La nota non può essere vuota. ";
             isValid = false;
         }
 
-        int stelle = 0;
+        int stelle;
         try {
             stelle = Integer.parseInt(stelleParam);
-            if (stelle <= 0 || stelle >= 6) {
+            if (!recensione.setStelle(stelle)) {
                 message += "Il numero di stelle deve essere compreso tra 1 e 5. ";
                 isValid = false;
             }
@@ -102,10 +121,7 @@ public class InserimentoRecensioneServlet extends HttpServlet {
             return;
         }
 
-        // Imposta dati recensione e salvataggio
-        recensione.setNota(nota);
-        recensione.setStelle(stelle);
-
+        // Salvataggio recensione
         if (!RecensioneDAO.doSave(recensione)) {
             message = "Inserimento: L'inserimento non ha avuto successo, nessuna riga inserita.";
         } else {
