@@ -33,20 +33,22 @@ public class PrenotazioniServlet extends HttpServlet {
             ArrayList<Medico> medicos = new ArrayList<>();
             ArrayList<Boolean> esistenaRecensionePerPrenotazione = new ArrayList<>();
 
-            PrenotazioneDAO.doRetrieveByIdUtente(utente.getId(), prenotaziones, disponibilitas, medicos);
+            if(PrenotazioneDAO.doRetrieveByIdUtente(utente.getId(), prenotaziones, disponibilitas, medicos)) {
+                for (Prenotazione prenotazione : prenotaziones) {
+                    disponibilitas.add(DisponibilitaDAO.doRetrieveById_disponibilita(prenotazione.getIdDisponibilita()));
+                    esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId()));
+                }
 
-            for(Prenotazione prenotazione : prenotaziones){
-                disponibilitas.add(DisponibilitaDAO.doRetrieveById_disponibilita(prenotazione.getIdDisponibilita()));
-                esistenaRecensionePerPrenotazione.add(RecensioneDAO.existsRecensioneForPrenotazione(prenotazione.getId()));
+                request.setAttribute("prenotaziones", prenotaziones);
+                request.setAttribute("disponibilitas", disponibilitas);
+                request.setAttribute("medicos", medicos);
+                request.setAttribute("esistenaRecensionePerPrenotazione", esistenaRecensionePerPrenotazione);
+
+                indirizzo = "/WEB-INF/common/prenotazioni.jsp";
             }
-
-
-            request.setAttribute("prenotaziones", prenotaziones);
-            request.setAttribute("disponibilitas", disponibilitas);
-            request.setAttribute("medicos", medicos);
-            request.setAttribute("esistenaRecensionePerPrenotazione", esistenaRecensionePerPrenotazione);
-
-            indirizzo = "/WEB-INF/common/prenotazioni.jsp";
+            else{
+                indirizzo = "/WEB-INF/results/error.jsp";
+            }
 
         }else{
             indirizzo = "/login.jsp";
