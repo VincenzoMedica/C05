@@ -12,14 +12,10 @@
 
 <html>
 
-<head>
-    <title>Title</title>
-</head>
-
 <body>
 
 <div class="footer">
-    <div class="f_copyright"> <p> © 2025 MedConnect. All rights reserved.</p> </div>
+    <div class="f_copyright"><p> © 2025 MedConnect. All rights reserved.</p></div>
     <div class="f_art24"><p>REGOLAMENTO (EU) 2022/2065 (DSA) art.24: 10.299.000M “AMARs” - Maggio 2024</p></div>
 </div>
 

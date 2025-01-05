@@ -23,8 +23,9 @@
         <%-- Controllo se l'utente è loggato --%>
         <c:choose>
             <c:when test="${not empty sessionScope.utente}">
-                <p>Benvenuto, <strong>${sessionScope.utente.email}</strong>!</p>
-                <a href="area-utente-servlet">AreaUtente</a> <!-- da levare -->
+                <p>Benvenuto, <strong>${sessionScope.utente.nome} ${sessionScope.utente.cognome}</strong>!</p>
+
+                <p>Cerca il medico e prenota la tua visita!</p>
 
                 <%--  search medico  --%>
                 <div class="form_search">
@@ -40,7 +41,9 @@
                     <input type="text" id="citta" name="citta" placeholder="es. Napoli">
                     </div>
 
+                    <div class="form3">
                     <input type="submit" value="Ricerca">
+                    </div>
 
                 </form>
                 </div>
