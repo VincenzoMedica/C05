@@ -10,7 +10,7 @@
 </head>
 <body>
 Sei loggato come "${utente.email}"
-<div align="center">
+<div id="success-container" align="center">
     <table class="title">
         <tr>
             <th>
@@ -23,6 +23,7 @@ Sei loggato come "${utente.email}"
     </table>
     <p/>
     <img src="./images/success.png"/><br clear="all"/>
+    <a href="<%= request.getContextPath() %>">Torna alla Home</a>
 </div>
 </body>
 </html>

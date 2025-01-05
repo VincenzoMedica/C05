@@ -42,11 +42,11 @@
 
     <div class="lc_bot">
 
-        <a href="">Hai dimenticato la password?</a>
+        <a href="workInProgress.jsp">Hai dimenticato la password?</a>
         <hr>
 
         <div class="lc_bot_register">
-        <p>Non hai ancora un account?</p> <a href=""> Registrati!</a>
+        <p>Non hai ancora un account?</p> <a href="workInProgress.jsp"> Registrati!</a>
         </div>
 
     </div>

@@ -22,9 +22,9 @@
     </div>
 
     <div class="hr">
-        <a href="">FAQ</a>
+        <a href="workInProgress.jsp">FAQ</a>
         <a href="prenotazioni-servlet">Le mie prenotazioni</a>
-        <a href="">Le mie recensioni</a>
+        <a href="workInProgress.jsp">Le mie recensioni</a>
         <c:choose>
             <c:when test="${not empty sessionScope.utente}">
                     <a href="logout">Logout</a>

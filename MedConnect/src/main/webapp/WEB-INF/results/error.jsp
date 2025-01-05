@@ -53,7 +53,7 @@
     </style>
 </head>
 <body>
-<div class="error-container">
+<div id="error-container" class="error-container">
     <h1>Oops!</h1>
     <p>Qualcosa è andato storto.</p>
     <p>Error <%= request.getAttribute("statusCode") != null ? request.getAttribute("statusCode") : "Non disponibile" %></p>

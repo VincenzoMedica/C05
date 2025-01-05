@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form3">
-                    <input type="submit" value="Ricerca">
+                    <input id="button-search" type="submit" value="Ricerca">
                     </div>
 
                 </form>
