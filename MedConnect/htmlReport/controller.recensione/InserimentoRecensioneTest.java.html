@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InserimentoRecensioneTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">InserimentoRecensioneTest Coverage Results</a> &gt; <a href="index.source.html" class="el_package">controller.recensione</a> &gt; <span class="el_source">InserimentoRecensioneTest.java</span></div><h1>InserimentoRecensioneTest.java</h1><pre class="source lang-java linenums">package controller.recensione;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.recensione.Recensione;
+import model.recensione.RecensioneDAO;
+import model.utente.Utente;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.*;
+
+/**
+ * Classe di test per la servlet {@link InserimentoRecensioneServlet}.
+ * Verifica il comportamento della servlet in diversi scenari, come validazione dei parametri,
+ * gestione delle sessioni e interazione con il DAO.
+ */
+<span class="fc" id="L26">public class InserimentoRecensioneTest {</span>
+
+    private InserimentoRecensioneServlet servlet;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
+    private HttpSession session;
+    private RequestDispatcher dispatcher;
+    private MockedStatic&lt;RecensioneDAO&gt; mockedRecensioneDAO;
+    /**
+     * Configura il contesto di test prima di ogni metodo.
+     * Inizializza la servlet e crea oggetti mock per request, response, session e dispatcher.
+     */
+    @BeforeEach
+    void setUp() {
+<span class="fc" id="L40">        servlet = new InserimentoRecensioneServlet();</span>
+<span class="fc" id="L41">        request = mock(HttpServletRequest.class);</span>
+<span class="fc" id="L42">        response = mock(HttpServletResponse.class);</span>
+<span class="fc" id="L43">        session = mock(HttpSession.class);</span>
+<span class="fc" id="L44">        dispatcher = mock(RequestDispatcher.class);</span>
+
+<span class="fc" id="L46">        mockedRecensioneDAO = mockStatic(RecensioneDAO.class);</span>
+<span class="fc" id="L47">    }</span>
+
+    @AfterEach
+    void tearDown() {
+<span class="fc" id="L51">        mockedRecensioneDAO.close(); // Chiudi il mock statico</span>
+<span class="fc" id="L52">    }</span>
+
+    /**
+     * Test per il caso in cui il parametro &quot;idPrenotazione&quot; è mancante.
+     * Verifica che venga restituito un errore 400.
+     */
+    @Test
+    void testDoPost_IdPrenotazioneMancante() throws ServletException, IOException {
+<span class="fc" id="L60">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(null);</span>
+<span class="fc" id="L61">        servlet.doPost(request, response);</span>
+<span class="fc" id="L62">        verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Id della prenotazione mancante o non valido.&quot;);</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Test per il caso in cui il parametro &quot;idPrenotazione&quot; non è numerico.
+     * Verifica che venga restituito un errore 400.
+     */
+    @Test
+    void testDoPost_IdPrenotazioneNonValido() throws ServletException, IOException {
+<span class="fc" id="L71">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(&quot;abc&quot;);</span>
+<span class="fc" id="L72">        servlet.doPost(request, response);</span>
+<span class="fc" id="L73">        verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Formato ID della prenotazione non valido.&quot;);</span>
+<span class="fc" id="L74">    }</span>
+
+    /**
+     * Test per il caso in cui la sessione utente è assente.
+     * Verifica che venga restituito un errore 401.
+     */
+    @Test
+    void testDoPost_SessioneNonValida() throws ServletException, IOException {
+<span class="fc" id="L82">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(&quot;1&quot;);</span>
+<span class="fc" id="L83">        when(request.getSession(false)).thenReturn(null);</span>
+
+<span class="fc" id="L85">        servlet.doPost(request, response);</span>
+
+<span class="fc" id="L87">        verify(response).sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Sessione non valida.&quot;);</span>
+<span class="fc" id="L88">    }</span>
+
+    /**
+     * Test per il caso in cui l'utente non è autenticato.
+     * Verifica che la richiesta venga reindirizzata alla pagina di login.
+     */
+    @Test
+    void testDoPost_UtenteNonAutenticato() throws ServletException, IOException {
+<span class="fc" id="L96">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(&quot;1&quot;);</span>
+<span class="fc" id="L97">        when(request.getSession(false)).thenReturn(session);</span>
+<span class="fc" id="L98">        when(session.getAttribute(&quot;utente&quot;)).thenReturn(null);</span>
+<span class="fc" id="L99">        when(request.getRequestDispatcher(&quot;/login.jsp&quot;)).thenReturn(dispatcher);</span>
+
+<span class="fc" id="L101">        servlet.doPost(request, response);</span>
+
+<span class="fc" id="L103">        verify(dispatcher).forward(request, response);</span>
+<span class="fc" id="L104">    }</span>
+
+    /**
+     * Test per il caso in cui esiste già una recensione per l'ID prenotazione.
+     * Verifica che venga mostrato un messaggio di errore e che la richiesta venga inoltrata.
+     */
+    @Test
+    void testDoPost_RecensioneEsistente() throws ServletException, IOException {
+<span class="fc" id="L112">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(&quot;1&quot;);</span>
+<span class="fc" id="L113">        when(request.getSession(false)).thenReturn(session);</span>
+<span class="fc" id="L114">        Utente utente = new Utente();</span>
+<span class="fc" id="L115">        utente.setId(1);</span>
+<span class="fc" id="L116">        when(session.getAttribute(&quot;utente&quot;)).thenReturn(utente);</span>
+<span class="fc" id="L117">        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(true);</span>
+<span class="fc" id="L118">        when(request.getRequestDispatcher(&quot;prenotazioni-servlet&quot;)).thenReturn(dispatcher);</span>
+
+<span class="fc" id="L120">        servlet.doPost(request, response);</span>
+
+<span class="fc" id="L122">        verify(request).setAttribute(eq(&quot;esito&quot;), contains(&quot;Esiste già una recensione&quot;));</span>
+<span class="fc" id="L123">        verify(dispatcher).forward(request, response);</span>
+<span class="fc" id="L124">    }</span>
+
+    /**
+     * Test per il caso in cui il salvataggio della recensione fallisce.
+     * Verifica che venga mostrato un messaggio di errore e che la richiesta venga inoltrata.
+     */
+    @Test
+    void testDoPost_CreazioneRecensioneFallita() throws ServletException, IOException {
+<span class="fc" id="L132">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(&quot;1&quot;);</span>
+<span class="fc" id="L133">        when(request.getParameter(&quot;nota&quot;)).thenReturn(&quot;Ottimo medico&quot;);</span>
+<span class="fc" id="L134">        when(request.getParameter(&quot;stelle&quot;)).thenReturn(&quot;5&quot;);</span>
+<span class="fc" id="L135">        when(request.getSession(false)).thenReturn(session);</span>
+<span class="fc" id="L136">        Utente utente = new Utente();</span>
+<span class="fc" id="L137">        utente.setId(1);</span>
+<span class="fc" id="L138">        when(session.getAttribute(&quot;utente&quot;)).thenReturn(utente);</span>
+        /*
+        * when() è un metodo di Mockito utilizzato per definire il comportamento di un mock.
+        * Quando si chiama un metodo su un oggetto mockato, si può specificare cosa deve restituire
+        * quel metodo per una determinata chiamata.
+        * In questo caso, si sta dicendo: &quot;Quando il metodo existsRecensioneForPrenotazione viene
+        * chiamato con il parametro 1&quot;.
+        *
+        * Si sta simulando la chiamata al metodo existsRecensioneForPrenotazione(int idPrenotazione)
+        * della classe RecensioneDAO.
+        *
+        *thenReturn() è un metodo che specifica quale valore il mock deve restituire quando il metodo
+        * existsRecensioneForPrenotazione(1) viene chiamato con il parametro 1.
+        *
+         */
+<span class="fc" id="L153">        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);</span>
+<span class="fc" id="L154">        when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);</span>
+<span class="fc" id="L155">        when(RecensioneDAO.doSave(any(Recensione.class))).thenReturn(false);</span>
+<span class="fc" id="L156">        when(request.getRequestDispatcher(&quot;prenotazioni-servlet&quot;)).thenReturn(dispatcher);</span>
+
+<span class="fc" id="L158">        servlet.doPost(request, response);</span>
+
+<span class="fc" id="L160">        verify(request).setAttribute(eq(&quot;esito&quot;), contains(&quot;L'inserimento non ha avuto successo&quot;));</span>
+<span class="fc" id="L161">        verify(dispatcher).forward(request, response);</span>
+<span class="fc" id="L162">    }</span>
+
+    /**
+     * Test per il caso in cui l'inserimento della recensione ha successo.
+     * Verifica che venga mostrato un messaggio di successo e che la richiesta venga inoltrata.
+     */
+    @Test
+    void testDoPost_InserimentoRiuscito() throws ServletException, IOException {
+<span class="fc" id="L170">        when(request.getParameter(&quot;idPrenotazione&quot;)).thenReturn(&quot;1&quot;);</span>
+<span class="fc" id="L171">        when(request.getParameter(&quot;nota&quot;)).thenReturn(&quot;Ottimo medico&quot;);</span>
+<span class="fc" id="L172">        when(request.getParameter(&quot;stelle&quot;)).thenReturn(&quot;5&quot;);</span>
+<span class="fc" id="L173">        when(request.getSession(false)).thenReturn(session);</span>
+<span class="fc" id="L174">        Utente utente = new Utente();</span>
+<span class="fc" id="L175">        utente.setId(1);</span>
+<span class="fc" id="L176">        when(session.getAttribute(&quot;utente&quot;)).thenReturn(utente);</span>
+<span class="fc" id="L177">        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);</span>
+<span class="fc" id="L178">        when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);</span>
+<span class="fc" id="L179">        when(RecensioneDAO.doSave(any(Recensione.class))).thenReturn(true);</span>
+<span class="fc" id="L180">        when(request.getRequestDispatcher(&quot;prenotazioni-servlet&quot;)).thenReturn(dispatcher);</span>
+
+<span class="fc" id="L182">        servlet.doPost(request, response);</span>
+
+<span class="fc" id="L184">        verify(request).setAttribute(eq(&quot;esito&quot;), contains(&quot;Inserimento effettuato con successo&quot;));</span>
+<span class="fc" id="L185">        verify(dispatcher).forward(request, response);</span>
+<span class="fc" id="L186">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
