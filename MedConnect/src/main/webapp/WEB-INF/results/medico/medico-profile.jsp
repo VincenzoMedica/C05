@@ -10,30 +10,16 @@
 <html>
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> MedConnect - ${medico.nome} ${medico.cognome}</title>
     <link rel="stylesheet" href="css/styles.css"/>
 
     <style>
-        /* Stile per il dialog         #dialog {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            z-index: 1000;
-            width: 60%;
-            max-width: 800px;
-            height: 70%;
-            max-height: 600px;
-            overflow-y: auto;
-            border-radius: 10px;
-        }*/
 
+        /* ho provato ad includere questa sezione nel css ma da problemi.
+           Il tasto di chiusura del dialog si sposta a sinistra e perde lo stile. */
 
         #dialog-overlay {
             display: none;
@@ -53,6 +39,7 @@
             cursor: pointer;
             float: right;
         }
+
     </style>
 
     <script>
@@ -85,7 +72,8 @@
             <label>Data: <input type="text" id="dialog-data" name="data" readonly/></label><br>
             <label>Ora Inizio: <input type="text" id="dialog-oraIn" name="oraIn" readonly/></label><br>
             <label>Ora Fine: <input type="text" id="dialog-oraFi" name="oraFi" readonly/></label><br>
-            <label>Nota: <textarea name="nota" placeholder="Inserisci una nota per la tua prenotazione (max 255 caratteri)."></textarea></label><br>
+            <label>Nota: <textarea name="nota"
+                                   placeholder="Inserisci una nota per la tua prenotazione (max 255 caratteri)."></textarea></label><br>
             <input type="hidden" id="dialog-id" name="idDisponibilita">
             <input type="hidden" name="idPaziente" value="${utente.id}">
             <button type="submit">Conferma</button>
