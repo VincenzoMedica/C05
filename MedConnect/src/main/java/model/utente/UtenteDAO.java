@@ -17,7 +17,7 @@ public class UtenteDAO {
         ResultSet resultSet = null;
         Utente utente = null;
 
-        try (Connection connection = new ConPool().getConnection()) {
+        try (Connection connection = ConPool.getConnection()) {
             statement = connection.prepareStatement(
                     "SELECT id, nome, cognome, genere, data_nascita, luogo_nascita, email, pass, num_cellulare, cf, biografia\n" +
                         "FROM utenteregistrato WHERE email=? AND pass=SHA1(?)"
