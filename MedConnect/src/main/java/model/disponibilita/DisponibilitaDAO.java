@@ -23,7 +23,7 @@ public class DisponibilitaDAO {
         try (Connection con = new ConPool().getConnection()) {
             List<Disponibilita> disponibilitaList = new ArrayList<>();
             PreparedStatement ps =
-                    con.prepareStatement("select * from disponibilita d where d.ID_medico=? and d.ID_disponibilita not in (select p.ID_disponibilita from prenotazione p);");
+                    con.prepareStatement("select * from disponibilita d where d.ID_medico=? and d.ID_disponibilita not in (select p.ID_disponibilita from prenotazione p) order by data, ora_in;");
             ps.setInt(1, idMedico);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
