@@ -31,8 +31,8 @@ MedConnect is a web app for medical bookings, is produced for the Software Engin
 
 ### Database
 
-La Cartella `Database` contiene due file `videodrome.sql` e `seed.sql`, essi vanno eseguiti per far si che il database sia pronto all'uso.
-- **`videodrome.sql`:** crea tutta la struttura del database.
+La Cartella `Database` contiene due file `medconnect.sql` e `seed.sql`, essi vanno eseguiti per far si che il database sia pronto all'uso.
+- **`medconnect.sql`:** crea tutta la struttura del database.
 - **`seed.sql`:** carica dei seed all'interno del database.
 
 Per avere il database integrato in IntelliJ bisogna andare nella sezione `Database` nel pannello a destra dell'interfaccia utente di IntelliJ, cliccare sull'icona `+` in alto a sinistra del pannello Database, selezionare `Data Source -> MySQL` infine complilare con le credenziali del proprio database e poi premere `OK`.
