@@ -44,6 +44,7 @@ public class InserimentoRecensioneTest {
         dispatcher = mock(RequestDispatcher.class);
 
         mockedRecensioneDAO = mockStatic(RecensioneDAO.class);
+
     }
 
     @AfterEach
@@ -72,7 +73,6 @@ public class InserimentoRecensioneTest {
         servlet.doPost(request, response);
         verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, "Formato ID della prenotazione non valido.");
     }
-
     /**
      * Test per il caso in cui la sessione utente è assente.
      * Verifica che venga restituito un errore 401.
@@ -183,5 +183,75 @@ public class InserimentoRecensioneTest {
 
         verify(request).setAttribute(eq("esito"), contains("Inserimento effettuato con successo"));
         verify(dispatcher).forward(request, response);
+    }
+
+    @Test
+    void testDoPost_IdMedicoNonValido() throws ServletException, IOException {
+        when(request.getParameter("idPrenotazione")).thenReturn("1");
+        when(request.getParameter("nota")).thenReturn("Ottimo medico");
+        when(request.getParameter("stelle")).thenReturn("5");
+        when(request.getSession(false)).thenReturn(session);
+        Utente utente = new Utente();
+        utente.setId(1);
+        when(session.getAttribute("utente")).thenReturn(utente);
+        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
+        when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(0);
+        when(request.getRequestDispatcher("prenotazioni-servlet")).thenReturn(dispatcher);
+
+        servlet.doPost(request, response);
+
+        verify(request).setAttribute(eq("esito"), contains("Riprovare, l'inserimento della recensione non ha avuto successo "));
+    }
+
+    @Test
+    void testDoPost_isValidTrue() throws ServletException, IOException {
+        when(request.getParameter("idPrenotazione")).thenReturn("1");
+        when(request.getParameter("nota")).thenReturn(null);
+        when(request.getParameter("stelle")).thenReturn("5");
+        when(request.getSession(false)).thenReturn(session);
+        Utente utente = new Utente();
+        utente.setId(1);
+        when(session.getAttribute("utente")).thenReturn(utente);
+        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
+        when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);
+
+        when(request.getRequestDispatcher("creazione-inserimento-recensione-servlet")).thenReturn(dispatcher);
+
+        servlet.doPost(request, response);
+
+        verify(request).setAttribute(eq("esito"), contains("Errore nei dati inseriti"));
+        verify(dispatcher).forward(request, response);
+    }
+
+    @Test
+    void testDoPost_IdPrenotazioneRecensioneNonValido() throws ServletException, IOException {
+        when(request.getParameter("idPrenotazione")).thenReturn("-1");
+        when(request.getParameter("nota")).thenReturn("Ottimo medico");
+        when(request.getParameter("stelle")).thenReturn("5");
+        when(request.getSession(false)).thenReturn(session);
+        Utente utente = new Utente();
+        utente.setId(1);
+        when(session.getAttribute("utente")).thenReturn(utente);
+        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
+
+        servlet.doPost(request, response);
+
+        verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore: id_prenotazione non valido.");
+    }
+
+    @Test
+    void testDoPost_IdPazienteRecensioneNonValido() throws ServletException, IOException {
+        when(request.getParameter("idPrenotazione")).thenReturn("1");
+        when(request.getParameter("nota")).thenReturn("Ottimo medico");
+        when(request.getParameter("stelle")).thenReturn("5");
+        when(request.getSession(false)).thenReturn(session);
+        Utente utente = new Utente();
+        utente.setId(-1);
+        when(session.getAttribute("utente")).thenReturn(utente);
+        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
+
+        servlet.doPost(request, response);
+
+        verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore: id_paziente non valido.");
     }
 }

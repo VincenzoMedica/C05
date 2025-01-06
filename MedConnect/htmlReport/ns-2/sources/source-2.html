@@ -64,18 +64,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    70,8%
+    91,7%
   </span>
   <span class="absValue">
-    (17/24)
+    (22/24)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    70,1%
+    92,5%
   </span>
   <span class="absValue">
-    (47/67)
+    (62/67)
   </span>
 </td>
 </tr>
@@ -168,22 +168,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;        // Creazione e validazione della recensione
 <b class="fc">&nbsp;        Recensione recensione = new Recensione();</b>
-<b class="pc">&nbsp;        if (!recensione.setId_prenotazione(idPrenotazione)) {</b>
-<b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Errore: id_prenotazione non valido.&quot;);</b>
-<b class="nc">&nbsp;            return;</b>
+<b class="fc">&nbsp;        if (!recensione.setId_prenotazione(idPrenotazione)) {</b>
+<b class="fc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Errore: id_prenotazione non valido.&quot;);</b>
+<b class="fc">&nbsp;            return;</b>
 &nbsp;        }
-<b class="pc">&nbsp;        if (!recensione.setId_paziente(utente.getId())) {</b>
-<b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Errore: id_paziente non valido.&quot;);</b>
-<b class="nc">&nbsp;            return;</b>
+<b class="fc">&nbsp;        if (!recensione.setId_paziente(utente.getId())) {</b>
+<b class="fc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Errore: id_paziente non valido.&quot;);</b>
+<b class="fc">&nbsp;            return;</b>
 &nbsp;        }
 &nbsp;
 <b class="fc">&nbsp;        int idMedico = RecensioneDAO.getIdMedicoByPrenotazione(idPrenotazione);</b>
-<b class="pc">&nbsp;        if (idMedico &lt; 1) {</b>
-<b class="nc">&nbsp;            message = &quot;Medico non trovato.&quot;;</b>
-<b class="nc">&nbsp;            request.setAttribute(&quot;esito&quot;, &quot;Riprovare, l&#39;inserimento della recensione non ha avuto successo (&quot; + message + &quot;).&quot;);</b>
-<b class="nc">&nbsp;            RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;prenotazioni-servlet&quot;);</b>
-<b class="nc">&nbsp;            dispatcher.forward(request, response);</b>
-<b class="nc">&nbsp;            return;</b>
+<b class="fc">&nbsp;        if (idMedico &lt; 1) {</b>
+<b class="fc">&nbsp;            message = &quot;Medico non trovato.&quot;;</b>
+<b class="fc">&nbsp;            request.setAttribute(&quot;esito&quot;, &quot;Riprovare, l&#39;inserimento della recensione non ha avuto successo (&quot; + message + &quot;).&quot;);</b>
+<b class="fc">&nbsp;            RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;prenotazioni-servlet&quot;);</b>
+<b class="fc">&nbsp;            dispatcher.forward(request, response);</b>
+<b class="fc">&nbsp;            return;</b>
 &nbsp;        }
 <b class="fc">&nbsp;        recensione.setId_medico(idMedico);</b>
 &nbsp;
@@ -192,9 +192,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        String stelleParam = request.getParameter(&quot;stelle&quot;);</b>
 <b class="fc">&nbsp;        boolean isValid = true;</b>
 &nbsp;
-<b class="pc">&nbsp;        if (!recensione.setNota(nota)) {</b>
-<b class="nc">&nbsp;            message += &quot;La nota non può essere vuota. &quot;;</b>
-<b class="nc">&nbsp;            isValid = false;</b>
+<b class="fc">&nbsp;        if (!recensione.setNota(nota)) {</b>
+<b class="fc">&nbsp;            message += &quot;La nota non può essere vuota. &quot;;</b>
+<b class="fc">&nbsp;            isValid = false;</b>
 &nbsp;        }
 &nbsp;
 &nbsp;        int stelle;
@@ -209,11 +209,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            isValid = false;</b>
 <b class="fc">&nbsp;        }</b>
 &nbsp;
-<b class="pc">&nbsp;        if (!isValid) {</b>
-<b class="nc">&nbsp;            request.setAttribute(&quot;esito&quot;, &quot;Errore nei dati inseriti (&quot; + message + &quot;).&quot;);</b>
-<b class="nc">&nbsp;            RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;creazione-inserimento-recensione-servlet&quot;);</b>
-<b class="nc">&nbsp;            dispatcher.forward(request, response);</b>
-<b class="nc">&nbsp;            return;</b>
+<b class="fc">&nbsp;        if (!isValid) {</b>
+<b class="fc">&nbsp;            request.setAttribute(&quot;esito&quot;, &quot;Errore nei dati inseriti (&quot; + message + &quot;).&quot;);</b>
+<b class="fc">&nbsp;            RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;creazione-inserimento-recensione-servlet&quot;);</b>
+<b class="fc">&nbsp;            dispatcher.forward(request, response);</b>
+<b class="fc">&nbsp;            return;</b>
 &nbsp;        }
 &nbsp;
 &nbsp;        // Salvataggio recensione
@@ -252,7 +252,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-06 08:59</div>
+    <div style="float:right;">generated on 2025-01-06 11:08</div>
 </div>
 </body>
 </html>
