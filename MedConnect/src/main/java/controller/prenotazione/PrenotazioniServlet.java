@@ -45,7 +45,10 @@ public class PrenotazioniServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String indirizzo;
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sessione non valida.");
+        }
         Utente utente = (Utente) session.getAttribute("utente");
 
         // Verifica se l'utente è autenticato
