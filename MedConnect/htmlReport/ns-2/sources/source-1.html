@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > CreazioneInserimentoRecensioneServlet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">controller.recensione</a>
+</div>
+
+<h1>Coverage Summary for Class: CreazioneInserimentoRecensioneServlet (controller.recensione)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreazioneInserimentoRecensioneServlet</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package controller.recensione;
+&nbsp;
+&nbsp;import jakarta.servlet.RequestDispatcher;
+&nbsp;import jakarta.servlet.ServletException;
+&nbsp;import jakarta.servlet.annotation.WebServlet;
+&nbsp;import jakarta.servlet.http.HttpServlet;
+&nbsp;import jakarta.servlet.http.HttpServletRequest;
+&nbsp;import jakarta.servlet.http.HttpServletResponse;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;/**
+&nbsp; * Servlet per la creazione e l&#39;inserimento di una recensione.
+&nbsp; * Gestisce la richiesta di creazione di una recensione associata a una prenotazione,
+&nbsp; * recuperando l&#39;ID della prenotazione e inoltrando la richiesta alla pagina di inserimento della recensione.
+&nbsp; *
+&nbsp; * @author [C05]
+&nbsp; * @version 1.0
+&nbsp; */
+&nbsp;@WebServlet(name = &quot;creazione-inserimento-recensione-servlet&quot;, value = &quot;/creazione-inserimento-recensione-servlet&quot;)
+<b class="nc">&nbsp;public class CreazioneInserimentoRecensioneServlet extends HttpServlet {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gestisce la richiesta HTTP POST per creare una recensione.
+&nbsp;     * Recupera l&#39;ID della prenotazione dalla richiesta, verifica la sua validità e inoltra la richiesta alla pagina del form di inserimento.
+&nbsp;     * In caso di errori, invia una risposta con un messaggio di errore.
+&nbsp;     *
+&nbsp;     * @param request  La richiesta HTTP ricevuta.
+&nbsp;     * @param response La risposta HTTP da inviare.
+&nbsp;     * @throws ServletException Se si verifica un errore nel processo di servlet.
+&nbsp;     * @throws IOException      Se si verifica un errore nella gestione della risposta.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+&nbsp;        String indirizzo;
+&nbsp;
+&nbsp;        // Verifica che l&#39;ID della prenotazione sia presente
+<b class="nc">&nbsp;        if (request.getParameter(&quot;idPrenotazione&quot;) == null || request.getParameter(&quot;idPrenotazione&quot;).isEmpty()) {</b>
+<b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Id della prenotazione a cui scrivere la recensione e&#39; mancante o non valido&quot;);</b>
+<b class="nc">&nbsp;            return;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        int idPrenotazione;
+&nbsp;        try {
+&nbsp;            // Converte l&#39;ID della prenotazione in un intero
+<b class="nc">&nbsp;            idPrenotazione = Integer.parseInt(request.getParameter(&quot;idPrenotazione&quot;));</b>
+<b class="nc">&nbsp;        } catch (NumberFormatException e) {</b>
+&nbsp;            // Gestisce il caso di un formato non valido per l&#39;ID della prenotazione
+<b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Formato Id della prenotazione a cui scrivere la recensione non valido&quot;);</b>
+<b class="nc">&nbsp;            return;</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Imposta l&#39;id come attributo della richiesta
+<b class="nc">&nbsp;        request.setAttribute(&quot;idPrenotazione&quot;, idPrenotazione);</b>
+&nbsp;
+&nbsp;        // Inoltra alla pagina del form
+<b class="nc">&nbsp;        RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/common/inserimentoRecensione.jsp&quot;);</b>
+<b class="nc">&nbsp;        dispatcher.forward(request, response);</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-06 08:59</div>
+</div>
+</body>
+</html>
