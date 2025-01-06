@@ -254,4 +254,44 @@ public class InserimentoRecensioneTest {
 
         verify(response).sendError(HttpServletResponse.SC_BAD_REQUEST, "Errore: id_paziente non valido.");
     }
+
+    @Test
+    void testDoPost_StelleMinore1() throws ServletException, IOException {
+        when(request.getParameter("idPrenotazione")).thenReturn("1");
+        when(request.getParameter("nota")).thenReturn(null);
+        when(request.getParameter("stelle")).thenReturn("-1");
+        when(request.getSession(false)).thenReturn(session);
+        Utente utente = new Utente();
+        utente.setId(1);
+        when(session.getAttribute("utente")).thenReturn(utente);
+        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
+        when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);
+
+        when(request.getRequestDispatcher("creazione-inserimento-recensione-servlet")).thenReturn(dispatcher);
+
+        servlet.doPost(request, response);
+
+        verify(request).setAttribute(eq("esito"), contains("Il numero di stelle deve essere compreso tra 1 e 5."));
+        verify(dispatcher).forward(request, response);
+    }
+
+    @Test
+    void testDoPost_StelleNonValida() throws ServletException, IOException {
+        when(request.getParameter("idPrenotazione")).thenReturn("1");
+        when(request.getParameter("nota")).thenReturn(null);
+        when(request.getParameter("stelle")).thenReturn("abc");
+        when(request.getSession(false)).thenReturn(session);
+        Utente utente = new Utente();
+        utente.setId(1);
+        when(session.getAttribute("utente")).thenReturn(utente);
+        when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
+        when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);
+
+        when(request.getRequestDispatcher("creazione-inserimento-recensione-servlet")).thenReturn(dispatcher);
+
+        servlet.doPost(request, response);
+
+        verify(request).setAttribute(eq("esito"), contains("Il numero di stelle deve essere un numero valido. "));
+        verify(dispatcher).forward(request, response);
+    }
 }
