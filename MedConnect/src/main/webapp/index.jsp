@@ -21,10 +21,9 @@
     <div class="cl">
 
         <%-- Controllo se l'utente è loggato --%>
-        <c:choose>
-            <c:when test="${not empty sessionScope.utente}">
+        <c:if test="${not empty sessionScope.utente}">
                 <p>Benvenuto, <strong>${sessionScope.utente.nome} ${sessionScope.utente.cognome}</strong>!</p>
-
+        </c:if>
                 <p>Cerca il medico e prenota la tua visita!</p>
 
                 <%--  search medico  --%>
@@ -47,11 +46,11 @@
 
                 </form>
                 </div>
-            </c:when>
-            <c:otherwise>
-                <p>Accedi per usufruire dei servizi.</p>
-            </c:otherwise>
-        </c:choose>
+
+            <c:if test="${empty sessionScope.utente}">
+                <p>Accedi per usufruire di tutti i servizi.</p>
+            </c:if>
+
     </div>
 
     <div class="cr">

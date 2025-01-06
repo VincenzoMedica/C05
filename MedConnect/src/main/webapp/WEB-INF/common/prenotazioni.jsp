@@ -101,9 +101,9 @@
                 </button>
             </form>
         </div>
-        <%
-        } else {
-        %>
+        <% } else if (esistenaRecensionePerPrenotazione.get(indice)) { %>
+
+        <% } else { %>
 
         <button type="submit" name="idPrenotazione">
             Modifica

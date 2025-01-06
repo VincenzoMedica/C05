@@ -1,9 +1,11 @@
 <jsp:useBean id="medico" scope="request" type="model.medico.Medico"/>
-<jsp:useBean id="utente" scope="session" type="model.utente.Utente"/>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${sessionScope.utente != null}">
+    <jsp:useBean id="utente" scope="session" type="model.utente.Utente"/>
+</c:if>
 <jsp:useBean id="disponibilitaList" scope="request" type="java.util.List"/>
 <%@ page session="true" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@include file="/header.jsp" %>
 
@@ -75,7 +77,9 @@
             <label>Nota: <textarea name="nota" cols="60" rows="5" maxlength="255"
                                    placeholder="Inserisci una nota per la tua prenotazione (max 255 caratteri)."></textarea></label><br>
             <input type="hidden" id="dialog-id" name="idDisponibilita">
-            <input type="hidden" name="idPaziente" value="${utente.id}">
+            <c:if test="${utente != null}">
+                <input type="hidden" name="idPaziente" value="${utente.id}">
+            </c:if>
             <button type="submit">Conferma</button>
         </form>
     </div>
@@ -113,18 +117,25 @@
 
         <hr>
 
-        <div class="disponibilita_medico">
-            <h3>scegli tra le disponibilità e prenota una visita!</h3>
-            <div class="availability-container">
-                <c:forEach items="${disponibilitaList}" var="disponibilita">
-                    <div class="availability-card"
-                         onclick="openDialog('${disponibilita.id}','${disponibilita.data}', '${disponibilita.oraIn}', '${disponibilita.oraFi}')">
-                        <span class="availability-date">${disponibilita.data}</span>
-                        <span class="availability-time">${disponibilita.oraIn} - ${disponibilita.oraFi}</span>
-                    </div>
-                </c:forEach>
+        <c:if test="${disponibilitaList[0] != null}">
+            <div class="disponibilita_medico">
+                <h3>scegli tra le disponibilità e prenota una visita!</h3>
+                <div class="availability-container">
+                    <c:forEach items="${disponibilitaList}" var="disponibilita">
+                        <div class="availability-card"
+                             onclick="openDialog('${disponibilita.id}','${disponibilita.data}', '${disponibilita.oraIn}', '${disponibilita.oraFi}')">
+                            <span class="availability-date">${disponibilita.data}</span>
+                            <span class="availability-time">${disponibilita.oraIn} - ${disponibilita.oraFi}</span>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
-        </div>
+        </c:if>
+        <c:if test="${disponibilitaList[0] == null}">
+            <div class="disponibilita_medico">
+                <h3>Attualmente questo medico non ha disponibilità!</h3>
+            </div>
+        </c:if>
 
     </c:if>
 

@@ -6,12 +6,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.disponibilita.Disponibilita;
 import model.disponibilita.DisponibilitaDAO;
 import model.medico.Medico;
 import model.medico.MedicoDAO;
 import model.prenotazione.Prenotazione;
 import model.prenotazione.PrenotazioneDAO;
+import model.utente.Utente;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +23,18 @@ public class EffettuaPrenotazione extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Sessione non valida.");
+        }
+
+        Utente utente = (Utente) session.getAttribute("utente");
+        if (utente == null) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+            dispatcher.forward(request, response);
+        }
 
         String nota = request.getParameter("nota");
         int idPaziente = Integer.parseInt(request.getParameter("idPaziente"));
