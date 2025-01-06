@@ -1,0 +1,274 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Recensione</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model.recensione</a>
+</div>
+
+<h1>Coverage Summary for Class: Recensione (model.recensione)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Recensione</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model.recensione;
+&nbsp;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;/**
+&nbsp; * La classe {@code Recensione} rappresenta una recensione relativa a una prenotazione medica.
+&nbsp; * Contiene informazioni sull&#39;identificativo della recensione, della prenotazione, del medico, del paziente,
+&nbsp; * una nota descrittiva e un numero di stelle assegnato.
+&nbsp; *
+&nbsp; * @author [C05]
+&nbsp; * @version 1.0
+&nbsp; */
+&nbsp;public class Recensione {
+&nbsp;    private int id_recensione;
+&nbsp;    private int id_prenotazione;
+&nbsp;    private int id_medico;
+&nbsp;    private int id_paziente;
+&nbsp;    private String nota;
+&nbsp;    private int stelle; // Numero di stelle assegnate nella recensione (da 1 a 5)
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Costruttore di default.
+&nbsp;     */
+<b class="fc">&nbsp;    public Recensione() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restituisce l&#39;identificativo della recensione.
+&nbsp;     *
+&nbsp;     * @return l&#39;ID della recensione.
+&nbsp;     */
+&nbsp;    public int getId_recensione() {
+<b class="fc">&nbsp;        return id_recensione;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Imposta l&#39;identificativo della recensione.
+&nbsp;     *
+&nbsp;     * @param id_recensione l&#39;ID della recensione.
+&nbsp;     * @return {@code true} se l&#39;ID è valido (valore numerico non negativo), {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public boolean setId_recensione(int id_recensione) {
+<b class="fc">&nbsp;        if (Pattern.compile(&quot;^\\d+$&quot;).matcher(String.valueOf(id_recensione)).matches()) {</b>
+<b class="fc">&nbsp;            this.id_recensione = id_recensione;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restituisce l&#39;identificativo della prenotazione associata.
+&nbsp;     *
+&nbsp;     * @return l&#39;ID della prenotazione.
+&nbsp;     */
+&nbsp;    public int getId_prenotazione() {
+<b class="fc">&nbsp;        return id_prenotazione;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Imposta l&#39;identificativo della prenotazione associata.
+&nbsp;     *
+&nbsp;     * @param id_prenotazione l&#39;ID della prenotazione.
+&nbsp;     * @return {@code true} se l&#39;ID è valido (valore numerico non negativo), {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public boolean setId_prenotazione(int id_prenotazione) {
+<b class="fc">&nbsp;        if (Pattern.compile(&quot;^\\d+$&quot;).matcher(String.valueOf(id_prenotazione)).matches()) {</b>
+<b class="fc">&nbsp;            this.id_prenotazione = id_prenotazione;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restituisce l&#39;identificativo del medico associato.
+&nbsp;     *
+&nbsp;     * @return l&#39;ID del medico.
+&nbsp;     */
+&nbsp;    public int getId_medico() {
+<b class="fc">&nbsp;        return id_medico;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Imposta l&#39;identificativo del medico associato.
+&nbsp;     *
+&nbsp;     * @param id_medico l&#39;ID del medico.
+&nbsp;     * @return {@code true} se l&#39;ID è valido (valore numerico non negativo), {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public boolean setId_medico(int id_medico) {
+<b class="fc">&nbsp;        if (Pattern.compile(&quot;^\\d+$&quot;).matcher(String.valueOf(id_medico)).matches()) {</b>
+<b class="fc">&nbsp;            this.id_medico = id_medico;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restituisce l&#39;identificativo del paziente autore della recensione.
+&nbsp;     *
+&nbsp;     * @return l&#39;ID del paziente.
+&nbsp;     */
+&nbsp;    public int getId_paziente() {
+<b class="fc">&nbsp;        return id_paziente;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Imposta l&#39;identificativo del paziente autore della recensione.
+&nbsp;     *
+&nbsp;     * @param id_paziente l&#39;ID del paziente.
+&nbsp;     * @return {@code true} se l&#39;ID è valido (valore numerico non negativo), {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public boolean setId_paziente(int id_paziente) {
+<b class="fc">&nbsp;        if (Pattern.compile(&quot;^\\d+$&quot;).matcher(String.valueOf(id_paziente)).matches()) {</b>
+<b class="fc">&nbsp;            this.id_paziente = id_paziente;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restituisce la nota descrittiva della recensione.
+&nbsp;     *
+&nbsp;     * @return la nota della recensione.
+&nbsp;     */
+&nbsp;    public String getNota() {
+<b class="fc">&nbsp;        return nota;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Imposta la nota descrittiva della recensione.
+&nbsp;     *
+&nbsp;     * @param nota la nota della recensione (massimo 255 caratteri).
+&nbsp;     * @return {@code true} se la nota è valida (non nulla e di lunghezza massima 255 caratteri), {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public boolean setNota(String nota) {
+<b class="fc">&nbsp;        if (nota != null &amp;&amp; Pattern.compile(&quot;^.{0,255}$&quot;).matcher(nota).matches()) {</b>
+<b class="fc">&nbsp;            this.nota = nota;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Restituisce il numero di stelle assegnate nella recensione.
+&nbsp;     *
+&nbsp;     * @return il numero di stelle.
+&nbsp;     */
+&nbsp;    public int getStelle() {
+<b class="fc">&nbsp;        return stelle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Imposta il numero di stelle assegnate nella recensione.
+&nbsp;     *
+&nbsp;     * @param stelle il numero di stelle (da 1 a 5).
+&nbsp;     * @return {@code true} se il valore è valido (compreso tra 1 e 5), {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public boolean setStelle(int stelle) {
+<b class="fc">&nbsp;        if (Pattern.compile(&quot;^[1-5]$&quot;).matcher(String.valueOf(stelle)).matches()) {</b>
+<b class="fc">&nbsp;            this.stelle = stelle;</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-06 11:54</div>
+</div>
+</body>
+</html>

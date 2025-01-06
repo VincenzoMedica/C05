@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > RecensioneDAO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">model.recensione</a>
+</div>
+
+<h1>Coverage Summary for Class: RecensioneDAO (model.recensione)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RecensioneDAO</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package model.recensione;
+&nbsp;
+&nbsp;import model.ConPool;
+&nbsp;
+&nbsp;import java.sql.Connection;
+&nbsp;import java.sql.PreparedStatement;
+&nbsp;import java.sql.ResultSet;
+&nbsp;import java.sql.SQLException;
+&nbsp;
+&nbsp;/**
+&nbsp; * La classe {@code RecensioneDAO} fornisce metodi per gestire le operazioni
+&nbsp; * di accesso al database relative alle recensioni, come il salvataggio e la verifica di esistenza.
+&nbsp; */
+<b class="nc">&nbsp;public class RecensioneDAO {</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Recupera l&#39;identificativo del medico associato a una specifica prenotazione.
+&nbsp;     *
+&nbsp;     * @param id_prenotazione l&#39;identificativo della prenotazione.
+&nbsp;     * @return l&#39;ID del medico associato se trovato; {@code -1} altrimenti.
+&nbsp;     */
+&nbsp;    public static int getIdMedicoByPrenotazione(int id_prenotazione) {
+&nbsp;        // Prova a stabilire una connessione al database
+<b class="nc">&nbsp;        try (Connection con = ConPool.getConnection()) {</b>
+&nbsp;            // Query per recuperare l&#39;ID del medico
+<b class="nc">&nbsp;            String query = &quot;SELECT DISTINCT D.id_medico &quot; +</b>
+&nbsp;                    &quot;FROM disponibilita D, prenotazione P &quot; +
+&nbsp;                    &quot;WHERE P.ID_prenotazione = ? &quot; +
+&nbsp;                    &quot;AND D.ID_disponibilita = P.ID_disponibilita&quot;;
+&nbsp;
+&nbsp;            // Crea un PreparedStatement per eseguire la query
+<b class="nc">&nbsp;            try (PreparedStatement ps = con.prepareStatement(query)) {</b>
+&nbsp;                // Imposta il parametro ID_prenotazione nella query
+<b class="nc">&nbsp;                ps.setInt(1, id_prenotazione);</b>
+&nbsp;
+&nbsp;                // Esegui la query e ottieni il risultato
+<b class="nc">&nbsp;                ResultSet rs = ps.executeQuery();</b>
+&nbsp;
+&nbsp;                // Controlla se il risultato esiste e restituisci l&#39;ID del medico
+<b class="nc">&nbsp;                if (rs.next()) {</b>
+<b class="nc">&nbsp;                    return rs.getInt(&quot;id_medico&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+&nbsp;            // Gestisce eventuali errori SQL generando un&#39;eccezione runtime
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Se non ci sono risultati, ritorna -1
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Salva una nuova recensione nel database.
+&nbsp;     *
+&nbsp;     * @param recensione l&#39;oggetto {@code Recensione} da salvare.
+&nbsp;     * @return {@code true} se la recensione è stata salvata con successo; {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public static boolean doSave(Recensione recensione) {
+&nbsp;
+<b class="nc">&nbsp;        try (Connection con = ConPool.getConnection()) {</b>
+<b class="nc">&nbsp;            PreparedStatement ps = con.prepareStatement(&quot;INSERT INTO Recensione (ID_prenotazione, ID_medico, ID_paziente, nota, stelle) &quot; +</b>
+&nbsp;                    &quot; VALUES (?, ?, ?, ?, ?)&quot;);
+<b class="nc">&nbsp;            ps.setInt(1, recensione.getId_prenotazione());</b>
+<b class="nc">&nbsp;            ps.setInt(2, recensione.getId_medico());</b>
+<b class="nc">&nbsp;            ps.setInt(3, recensione.getId_paziente());</b>
+<b class="nc">&nbsp;            ps.setString(4, recensione.getNota());</b>
+<b class="nc">&nbsp;            ps.setInt(5, recensione.getStelle());</b>
+&nbsp;
+<b class="nc">&nbsp;            if (ps.executeUpdate() != 1) {</b>
+<b class="nc">&nbsp;                return false;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return true;</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Verifica l&#39;esistenza di una recensione associata a una specifica prenotazione.
+&nbsp;     *
+&nbsp;     * @param id_prenotazione l&#39;identificativo della prenotazione.
+&nbsp;     * @return {@code true} se esiste una recensione per la prenotazione; {@code false} altrimenti.
+&nbsp;     */
+&nbsp;    public static boolean existsRecensioneForPrenotazione(int id_prenotazione) {
+&nbsp;        // Prova a stabilire una connessione al database
+<b class="nc">&nbsp;        try (Connection con = ConPool.getConnection()) {</b>
+&nbsp;            // Query per verificare l&#39;esistenza di una recensione per l&#39;ID specificato
+<b class="nc">&nbsp;            String checkQuery = &quot;SELECT COUNT(*) &gt; 0 AS exists_review &quot; +</b>
+&nbsp;                    &quot;FROM recensione WHERE ID_prenotazione = ?&quot;;
+&nbsp;
+&nbsp;            // Crea un PreparedStatement per eseguire la query
+<b class="nc">&nbsp;            try (PreparedStatement checkPs = con.prepareStatement(checkQuery)) {</b>
+&nbsp;                // Imposta il parametro ID_prenotazione nella query
+<b class="nc">&nbsp;                checkPs.setInt(1, id_prenotazione);</b>
+&nbsp;
+&nbsp;                // Esegui la query e ottieni il risultato
+<b class="nc">&nbsp;                ResultSet rs = checkPs.executeQuery();</b>
+&nbsp;
+&nbsp;                // Controlla se il risultato esiste e restituisci il valore booleano
+<b class="nc">&nbsp;                if (rs.next()) {</b>
+<b class="nc">&nbsp;                    return rs.getBoolean(&quot;exists_review&quot;);</b>
+&nbsp;                }
+<b class="nc">&nbsp;            }</b>
+&nbsp;
+<b class="nc">&nbsp;        } catch (SQLException e) {</b>
+&nbsp;            // Gestisce eventuali errori SQL generando un&#39;eccezione runtime
+<b class="nc">&nbsp;            throw new RuntimeException(e);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        // Se non ci sono risultati, ritorna false
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-01-06 11:54</div>
+</div>
+</body>
+</html>
