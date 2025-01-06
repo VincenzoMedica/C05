@@ -1,0 +1,458 @@
+{
+  "id": "fcdf2498-a08e-4b9c-b160-0224ce2d4133",
+  "version": "2.0",
+  "name": "MedConnectTest_EffettuaPrenotazione ",
+  "url": "http://localhost:8080/medconnect_war",
+  "tests": [{
+    "id": "2d23a4bb-bf48-4ad4-8157-da024a685a37",
+    "name": "TC_1.3",
+    "commands": [{
+      "id": "e908a92c-eb9b-447a-8ccd-f324cdd8e9d9",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/medconnect_war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f16fd081-5dee-4831-816b-59fd8c30f3c7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2576x1408",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4b41a57a-815b-40fa-aa6a-9603a6c1d45e",
+      "comment": "",
+      "command": "click",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7d4817f8-18e4-4084-9a4d-ecdd879a0794",
+      "comment": "",
+      "command": "type",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Persico"
+    }, {
+      "id": "f26d0b61-d7eb-4cf7-abf4-549a685a341c",
+      "comment": "",
+      "command": "click",
+      "target": "id=button-search",
+      "targets": [
+        ["id=button-search", "id"],
+        ["css=#button-search", "css:finder"],
+        ["xpath=//input[@id='button-search']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "67076560-1e94-486d-a090-7c5996507720",
+      "comment": "",
+      "command": "click",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//li[@id='medico-12']/h3", "xpath:idRelative"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Cardiologo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9ed9c855-d752-42ba-9f16-c67d99af1496",
+      "comment": "",
+      "command": "click",
+      "target": "css=.availability-card:nth-child(5) > .availability-time",
+      "targets": [
+        ["css=.availability-card:nth-child(5) > .availability-time", "css:finder"],
+        ["xpath=//div[5]/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'15:30:00 - 16:30:00')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6804e3c1-a8bb-41ce-92db-a0a92bb03d9a",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "702982f1-dc1d-44db-bba9-ffb782493def",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e233f6f1-2fcc-45b8-b176-bbb399975221",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "dd0cf3bf-ba19-4b4d-8403-08a66009e4ee",
+      "comment": "",
+      "command": "type",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Motivo della visita: Necessità di ottenere un certificato medico."
+    }, {
+      "id": "5c679658-ebb1-4b9e-9b0d-dc0c02f0dd3b",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(11)",
+      "targets": [
+        ["css=button:nth-child(11)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "391c5d8a-8202-47a3-9e09-e17e059cfd8a",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=success-container",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "8a63db5c-cb04-443a-b570-b18040e48fb1",
+    "name": "TC_1.2",
+    "commands": [{
+      "id": "e193c363-5a41-40bb-8066-bce951b76a42",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/medconnect_war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "af0336af-de58-43e4-a360-4d30750bd70f",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2576x1408",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "70f11d2b-3f76-42dc-aec8-e654f3367823",
+      "comment": "",
+      "command": "click",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fa676f6e-1a2c-4db1-9f5d-62154d1e3ecb",
+      "comment": "",
+      "command": "type",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "Rossi"
+    }, {
+      "id": "27e050da-d604-4957-b3a0-37917a38050e",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//div/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "d3ab6677-0f82-4dbf-a6dd-9da32b3418f7",
+      "comment": "",
+      "command": "click",
+      "target": "id=button-search",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2f812797-f2b1-4eb3-a0ba-edac5b5c8569",
+      "comment": "",
+      "command": "click",
+      "target": "css=h2",
+      "targets": [
+        ["css=h2", "css:finder"],
+        ["xpath=//h2", "xpath:position"],
+        ["xpath=//h2[contains(.,'Francesco Rossi')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "85d93b88-344f-4530-aab8-98ae2315435b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.availability-card",
+      "targets": [
+        ["css=.availability-card", "css:finder"],
+        ["xpath=//div[@onclick=\"openDialog('15','2024-10-17', '17:00:00', '18:00:00')\"]", "xpath:attributes"],
+        ["xpath=//div[3]/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "606473ea-dd4e-4f5a-a084-061891608a81",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7381e56d-1c88-4d6f-bae4-33e018afe469",
+      "comment": "",
+      "command": "type",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Motivo della visita: Sto riscontrando da alcune settimane frequenti episodi di mal di testa persistente, soprattutto nelle ore serali, accompagnati da un leggero senso di nausea e difficoltà a concentrarmi sul lavoro. Vorrei approfondire per capire se potrebbe essere legato a stress, postura o altre cause sottostanti."
+    }, {
+      "id": "64eb5620-a8f0-4ad0-a81b-021d03601f53",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(11)",
+      "targets": [
+        ["css=button:nth-child(11)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2b36fe72-b698-4031-bd4a-409ceb4ab7d4",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=error-container",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "66efdfad-134e-4979-86c5-6dcf5bce872d",
+    "name": "TC_1.1",
+    "commands": [{
+      "id": "e030cd86-78a3-41de-8a5e-b0bc54b7b4b9",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/medconnect_war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "52888176-6dcb-4d31-961a-0df34e8bc3fd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "2576x1408",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8857fdc4-d379-4b3a-a769-8e1aa4736bfe",
+      "comment": "",
+      "command": "click",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eec1012d-969d-4237-b413-4bdb8356b6db",
+      "comment": "",
+      "command": "type",
+      "target": "id=ruoloNome",
+      "targets": [
+        ["id=ruoloNome", "id"],
+        ["name=ruoloNome", "name"],
+        ["css=#ruoloNome", "css:finder"],
+        ["xpath=//input[@id='ruoloNome']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Salvemini"
+    }, {
+      "id": "9b3780df-cc26-45ae-9f3a-45ac503c0832",
+      "comment": "",
+      "command": "click",
+      "target": "id=button-search",
+      "targets": [
+        ["id=button-search", "id"],
+        ["css=#button-search", "css:finder"],
+        ["xpath=//input[@id='button-search']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "064fb112-7df2-42f3-8b73-a9e31c3d3489",
+      "comment": "",
+      "command": "click",
+      "target": "css=h3",
+      "targets": [
+        ["css=h3", "css:finder"],
+        ["xpath=//li[@id='medico-12']/h3", "xpath:idRelative"],
+        ["xpath=//h3", "xpath:position"],
+        ["xpath=//h3[contains(.,'Cardiologo')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "01ff6284-7171-4468-a161-e9103e0c736f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.availability-card:nth-child(5) > .availability-time",
+      "targets": [
+        ["css=.availability-card:nth-child(5) > .availability-time", "css:finder"],
+        ["xpath=//div[5]/span[2]", "xpath:position"],
+        ["xpath=//span[contains(.,'15:30:00 - 16:30:00')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c0463f5-4ffb-47a5-b22c-073642c12435",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7501b7e2-21b6-444e-b6e3-bcdf50dc6413",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a14903ae-afae-4509-b307-34f8d6724535",
+      "comment": "",
+      "command": "click",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "21573d53-e54b-48c1-a66f-f5ad3a1a6784",
+      "comment": "",
+      "command": "type",
+      "target": "name=nota",
+      "targets": [
+        ["name=nota", "name"],
+        ["css=textarea", "css:finder"],
+        ["xpath=//textarea[@name='nota']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/label[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Attualmente sono in cura per ipertensione e vorrei discutere dell'andamento della terapia durante la visita."
+    }, {
+      "id": "bc0f396d-9c04-40de-a2e7-681b46541687",
+      "comment": "",
+      "command": "executeScript",
+      "target": "document.getElementById('dialog-id').value = '-15'",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "20947250-b154-473c-9b6f-a367abc3ef9a",
+      "comment": "",
+      "command": "click",
+      "target": "css=button:nth-child(11)",
+      "targets": [
+        ["css=button:nth-child(11)", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[@id='dialog']/div/form/button", "xpath:idRelative"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Conferma')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a4865628-619b-40d3-94df-7b19f82389aa",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=error-container",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "6a89ca43-8084-422b-b505-8393c9251aa2",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["2d23a4bb-bf48-4ad4-8157-da024a685a37"]
+  }],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/medconnect_war"],
+  "plugins": []
+}

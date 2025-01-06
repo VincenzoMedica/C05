@@ -23,7 +23,7 @@
     <ul>
         <c:forEach items="${medicoList}" var="medico">
             <form action="medico-profile" onclick="this.submit()" style="cursor: pointer;">
-                <li>
+                <li id="medico-${medico.id}">
                     <h2>${medico.nome} ${medico.cognome}</h2>
                     <h3>${medico.ruolo}</h3>
                     <input type="hidden" name="id" value=${medico.id}>

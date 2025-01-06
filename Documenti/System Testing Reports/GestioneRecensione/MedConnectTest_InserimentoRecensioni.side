@@ -1,0 +1,400 @@
+{
+  "id": "8af9516e-9fa3-4e6d-aed0-136a459ed869",
+  "version": "2.0",
+  "name": "MedConnectTest_InserimentoRecensioni",
+  "url": "http://localhost:8080",
+  "tests": [{
+    "id": "cafd0afa-6625-4130-88ff-235b7977fac6",
+    "name": "TC_3.1",
+    "commands": [{
+      "id": "5d8cf73f-f0a4-4e0a-bea2-592a3d8d8bbe",
+      "comment": "",
+      "command": "open",
+      "target": "/medconnect_war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e6ddf7b2-9f51-4b56-a071-cbf2e1877078",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1164x727",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "048d047b-2a12-4d22-9ab9-3766aa265056",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Le mie prenotazioni",
+      "targets": [
+        ["linkText=Le mie prenotazioni", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Le mie prenotazioni')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'prenotazioni-servlet')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Le mie prenotazioni')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6985cead-1193-416f-a71c-850d1d789873",
+      "comment": "",
+      "command": "click",
+      "target": "name=idPrenotazione",
+      "targets": [
+        ["name=idPrenotazione", "name"],
+        ["css=button", "css:finder"],
+        ["xpath=//button[@name='idPrenotazione']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Scrivi una recensione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5db81f3-6b52-45ac-bcc3-9f2b0552291e",
+      "comment": "",
+      "command": "click",
+      "target": "id=stelle",
+      "targets": [
+        ["id=stelle", "id"],
+        ["name=stelle", "name"],
+        ["css=#stelle", "css:finder"],
+        ["xpath=//select[@id='stelle']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "daac7c06-5c74-45ad-9881-39c672e7f0da",
+      "comment": "",
+      "command": "select",
+      "target": "id=stelle",
+      "targets": [],
+      "value": "label=1"
+    }, {
+      "id": "bb39561f-08a6-42a1-b16f-e8c5d4b0218c",
+      "comment": "",
+      "command": "click",
+      "target": "css=option:nth-child(2)",
+      "targets": [
+        ["css=option:nth-child(2)", "css:finder"],
+        ["xpath=//option[@value='1']", "xpath:attributes"],
+        ["xpath=//select[@id='stelle']/option[2]", "xpath:idRelative"],
+        ["xpath=//option[2]", "xpath:position"],
+        ["xpath=//option[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6c6aea37-5883-4ca3-8ea1-4fa608591f79",
+      "comment": "",
+      "command": "click",
+      "target": "id=nota",
+      "targets": [
+        ["id=nota", "id"],
+        ["name=nota", "name"],
+        ["css=#nota", "css:finder"],
+        ["xpath=//textarea[@id='nota']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f81490aa-11fc-441c-8e55-d4053c787a47",
+      "comment": "",
+      "command": "type",
+      "target": "id=nota",
+      "targets": [
+        ["id=nota", "id"],
+        ["name=nota", "name"],
+        ["css=#nota", "css:finder"],
+        ["xpath=//textarea[@id='nota']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Visita eccellente: medico professionale, chiaro e cortese. Mi ha messo a mio agio e fornito soluzioni efficaci. Consigliato!"
+    }, {
+      "id": "a6ee6d49-3f49-4559-91c3-f2d1f56318f5",
+      "comment": "",
+      "command": "executeScript",
+      "target": "document.getElementById('stelle').value = '0'",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "66f25d54-f9af-49b1-b22f-e0edf9c56a20",
+      "comment": "",
+      "command": "executeScript",
+      "target": "document.getElementById('stelle').removeAttribute('required')",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9cd65922-1330-4cfc-a27d-0b540195cf1b",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Pubblica')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8cb8d2fd-a7c0-4ecd-b6b2-65f33dccfa6b",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=error-paragraph",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "df6eebbb-9776-48a1-a103-6a73ed885049",
+    "name": "TC_3.2",
+    "commands": [{
+      "id": "156f2811-bf05-41cd-a4b5-9b16af1f7b82",
+      "comment": "",
+      "command": "open",
+      "target": "/medconnect_war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a1c03c1-7701-4776-b9a9-6494738ae74e",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1164x727",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "80b4ec41-fb5d-4dd9-b840-8928683cd17f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Le mie prenotazioni",
+      "targets": [
+        ["linkText=Le mie prenotazioni", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Le mie prenotazioni')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'prenotazioni-servlet')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Le mie prenotazioni')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9970f0f-d3fa-4b92-82e8-1db324369a4c",
+      "comment": "",
+      "command": "click",
+      "target": "name=idPrenotazione",
+      "targets": [
+        ["name=idPrenotazione", "name"],
+        ["css=button", "css:finder"],
+        ["xpath=//button[@name='idPrenotazione']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Scrivi una recensione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7a2ef9b-bcac-45b5-bad4-28d808510489",
+      "comment": "",
+      "command": "click",
+      "target": "id=stelle",
+      "targets": [
+        ["id=stelle", "id"],
+        ["name=stelle", "name"],
+        ["css=#stelle", "css:finder"],
+        ["xpath=//select[@id='stelle']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f98c06ea-960c-45e8-b0c3-15d34e6fb976",
+      "comment": "",
+      "command": "select",
+      "target": "id=stelle",
+      "targets": [],
+      "value": "label=5"
+    }, {
+      "id": "8c6cea20-5c66-4290-b6c2-e3ce10c8c53d",
+      "comment": "",
+      "command": "click",
+      "target": "css=option:nth-child(2)",
+      "targets": [
+        ["css=option:nth-child(2)", "css:finder"],
+        ["xpath=//option[@value='1']", "xpath:attributes"],
+        ["xpath=//select[@id='stelle']/option[2]", "xpath:idRelative"],
+        ["xpath=//option[2]", "xpath:position"],
+        ["xpath=//option[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ee229097-9cff-4973-b229-99b24ca553f9",
+      "comment": "",
+      "command": "click",
+      "target": "id=nota",
+      "targets": [
+        ["id=nota", "id"],
+        ["name=nota", "name"],
+        ["css=#nota", "css:finder"],
+        ["xpath=//textarea[@id='nota']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c6235d99-dd00-4d60-a9dc-0541611d295f",
+      "comment": "",
+      "command": "type",
+      "target": "id=nota",
+      "targets": [
+        ["id=nota", "id"],
+        ["name=nota", "name"],
+        ["css=#nota", "css:finder"],
+        ["xpath=//textarea[@id='nota']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "La visita con il dottor Fanti è stata eccellente. Professionale, cortese e chiaro nelle spiegazioni, mi ha fatto sentire a mio agio. Ha ascoltato con attenzione i miei sintomi e proposto un piano di cura efficace. Studio pulito e ben organizzato. Consiglio vivamente!"
+    }, {
+      "id": "8bd97c8f-a8ab-41af-99f9-1eba98992f9d",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Pubblica')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "23d1f5c3-7c4c-489e-b816-4078e9f6c8b3",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=error-paragraph",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "8aa340f6-cfdf-46c5-ba97-09865bc60634",
+    "name": "TC_3.3",
+    "commands": [{
+      "id": "5ca7de56-2e5e-4b98-934c-87b867ac7a97",
+      "comment": "",
+      "command": "open",
+      "target": "/medconnect_war/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "81bc0b9d-b554-44a3-a5af-d8eec7fef9b7",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1164x727",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a3422c4d-e1f4-4482-9b60-934132318013",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Le mie prenotazioni",
+      "targets": [
+        ["linkText=Le mie prenotazioni", "linkText"],
+        ["css=a:nth-child(2)", "css:finder"],
+        ["xpath=//a[contains(text(),'Le mie prenotazioni')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'prenotazioni-servlet')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Le mie prenotazioni')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9812d066-1920-49ef-a3d2-fb72b744da89",
+      "comment": "",
+      "command": "click",
+      "target": "name=idPrenotazione",
+      "targets": [
+        ["name=idPrenotazione", "name"],
+        ["css=button", "css:finder"],
+        ["xpath=//button[@name='idPrenotazione']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Scrivi una recensione')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "856b1d68-6fe1-48a2-aeb6-81b7a4db56ee",
+      "comment": "",
+      "command": "click",
+      "target": "id=stelle",
+      "targets": [
+        ["id=stelle", "id"],
+        ["name=stelle", "name"],
+        ["css=#stelle", "css:finder"],
+        ["xpath=//select[@id='stelle']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "53fd7af5-1bdd-4aac-83f7-fa689260496b",
+      "comment": "",
+      "command": "select",
+      "target": "id=stelle",
+      "targets": [],
+      "value": "label=5"
+    }, {
+      "id": "9e5390c0-f2dc-4ae9-81b1-108ca51e5acb",
+      "comment": "",
+      "command": "click",
+      "target": "css=option:nth-child(2)",
+      "targets": [
+        ["css=option:nth-child(2)", "css:finder"],
+        ["xpath=//option[@value='1']", "xpath:attributes"],
+        ["xpath=//select[@id='stelle']/option[2]", "xpath:idRelative"],
+        ["xpath=//option[2]", "xpath:position"],
+        ["xpath=//option[contains(.,'1')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9baca983-ac65-459b-8c55-7a0562dc09bc",
+      "comment": "",
+      "command": "click",
+      "target": "id=nota",
+      "targets": [
+        ["id=nota", "id"],
+        ["name=nota", "name"],
+        ["css=#nota", "css:finder"],
+        ["xpath=//textarea[@id='nota']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c09a0f10-65fc-4b18-b318-a692880ea09d",
+      "comment": "",
+      "command": "type",
+      "target": "id=nota",
+      "targets": [
+        ["id=nota", "id"],
+        ["name=nota", "name"],
+        ["css=#nota", "css:finder"],
+        ["xpath=//textarea[@id='nota']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Visita eccellente con il dottor Fanti: professionale, cortese e chiaro. Attento ai sintomi, ha proposto un piano di cura efficace. Studio ben organizzato. Consigliato!"
+    }, {
+      "id": "e2695025-48b6-4d29-bbfe-5746877b8316",
+      "comment": "",
+      "command": "click",
+      "target": "css=button",
+      "targets": [
+        ["css=button", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Pubblica')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5baeddd0-aa12-495c-a7f4-bac363b95607",
+      "comment": "",
+      "command": "assertElementPresent",
+      "target": "id=success-container",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "3157d0d1-6eef-490e-952c-86f0eeaf9e89",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["cafd0afa-6625-4130-88ff-235b7977fac6"]
+  }],
+  "urls": ["http://localhost:8080/"],
+  "plugins": []
+}

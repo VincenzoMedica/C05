@@ -61,7 +61,7 @@ public class MedicoDAO {
      * @throws RuntimeException se si verifica un errore di accesso al database.
      */
     public Medico doRetrieveById(String id) {
-        try (Connection con = new ConPool().getConnection()) {
+        try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("select m.*, u.email, u.nome, u.cognome, u.biografia, u.data_nascita, u.luogo_nascita, u.num_cellulare, u.genere " +
                             "from medico m " +
@@ -89,24 +89,19 @@ public class MedicoDAO {
      * @throws RuntimeException se si verifica un errore di accesso al database.
      */
     public List<Medico> doRetrieve(String ruoloNome, String citta) {
-        try (Connection con = new ConPool().getConnection()) {
+        try (Connection con = ConPool.getConnection()) {
             List<Medico> medicoList = new ArrayList<>();
 
             // Dividi ruoloNome in parole chiave
             String[] keywords = ruoloNome.split("\\s+");
-            StringBuilder queryBuilder = new StringBuilder(
-                    "select m.*, u.email, u.nome, u.cognome, u.biografia, u.data_nascita, u.luogo_nascita, u.num_cellulare, u.genere " +
-                            "from medico m " +
-                            "inner join utenteregistrato u on m.ID = u.ID " +
-                            "where m.citta like ? "
-            );
 
             // Aggiungi condizioni per ogni parola chiave
-            for (int i = 0; i < keywords.length; i++) {
-                queryBuilder.append("AND (m.Ruolo like ? OR u.nome like ? OR u.cognome like ?) ");
-            }
+            String queryBuilder = "select m.*, u.email, u.nome, u.cognome, u.biografia, u.data_nascita, u.luogo_nascita, u.num_cellulare, u.genere " +
+                    "from medico m " +
+                    "inner join utenteregistrato u on m.ID = u.ID " +
+                    "where m.citta like ? " + "AND (m.Ruolo like ? OR u.nome like ? OR u.cognome like ?) ".repeat(keywords.length);
 
-            PreparedStatement ps = con.prepareStatement(queryBuilder.toString());
+            PreparedStatement ps = con.prepareStatement(queryBuilder);
 
             // Imposta i parametri della query
             ps.setString(1, '%' + citta + '%');
