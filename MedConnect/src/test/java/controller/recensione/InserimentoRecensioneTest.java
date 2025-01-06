@@ -153,7 +153,7 @@ public class InserimentoRecensioneTest {
         when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
         when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);
         when(RecensioneDAO.doSave(any(Recensione.class))).thenReturn(false);
-        when(request.getRequestDispatcher("prenotazioni-servlet")).thenReturn(dispatcher);
+        when(request.getRequestDispatcher(anyString())).thenReturn(dispatcher);
 
         servlet.doPost(request, response);
 
@@ -177,11 +177,12 @@ public class InserimentoRecensioneTest {
         when(RecensioneDAO.existsRecensioneForPrenotazione(1)).thenReturn(false);
         when(RecensioneDAO.getIdMedicoByPrenotazione(1)).thenReturn(2);
         when(RecensioneDAO.doSave(any(Recensione.class))).thenReturn(true);
-        when(request.getRequestDispatcher("prenotazioni-servlet")).thenReturn(dispatcher);
+        RequestDispatcher dispatcher = mock(RequestDispatcher.class); // Usa il mock
+        when(request.getRequestDispatcher("/WEB-INF/results/success.jsp")).thenReturn(dispatcher);
 
         servlet.doPost(request, response);
 
-        verify(request).setAttribute(eq("esito"), contains("Inserimento effettuato con successo"));
+        verify(request).setAttribute(eq("message"), contains("Inserimento: Inserimento effettuato con successo"));
         verify(dispatcher).forward(request, response);
     }
 

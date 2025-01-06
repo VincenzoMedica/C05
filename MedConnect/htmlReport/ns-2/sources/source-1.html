@@ -37,10 +37,6 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 <th class="coverageStat 
 ">
-  Branch, %
-</th>
-<th class="coverageStat 
-">
   Line, %
 </th>
 </tr>
@@ -67,15 +63,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/13)
+    (0/10)
   </span>
 </td>
 </tr>
@@ -126,7 +114,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;        // Verifica che l&#39;ID della prenotazione sia presente
 <b class="nc">&nbsp;        if (request.getParameter(&quot;idPrenotazione&quot;) == null || request.getParameter(&quot;idPrenotazione&quot;).isEmpty()) {</b>
 <b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Id della prenotazione a cui scrivere la recensione e&#39; mancante o non valido&quot;);</b>
-<b class="nc">&nbsp;            return;</b>
+&nbsp;            return;
 &nbsp;        }
 &nbsp;
 &nbsp;        int idPrenotazione;
@@ -136,7 +124,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;        } catch (NumberFormatException e) {</b>
 &nbsp;            // Gestisce il caso di un formato non valido per l&#39;ID della prenotazione
 <b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_BAD_REQUEST, &quot;Formato Id della prenotazione a cui scrivere la recensione non valido&quot;);</b>
-<b class="nc">&nbsp;            return;</b>
+&nbsp;            return;
 <b class="nc">&nbsp;        }</b>
 &nbsp;
 &nbsp;        // Imposta l&#39;id come attributo della richiesta
@@ -145,7 +133,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;        // Inoltra alla pagina del form
 <b class="nc">&nbsp;        RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;/WEB-INF/common/inserimentoRecensione.jsp&quot;);</b>
 <b class="nc">&nbsp;        dispatcher.forward(request, response);</b>
-<b class="nc">&nbsp;    }</b>
+&nbsp;    }
 &nbsp;}
 &nbsp;
 &nbsp;
@@ -172,7 +160,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-06 11:54</div>
+    <div style="float:right;">generated on 2025-01-06 18:45</div>
 </div>
 </body>
 </html>

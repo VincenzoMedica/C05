@@ -60,10 +60,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    90,3%
   </span>
   <span class="absValue">
-    (24/24)
+    (28/31)
   </span>
 </td>
 </tr>
@@ -83,12 +83,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import jakarta.servlet.http.HttpServlet;
 &nbsp;import jakarta.servlet.http.HttpServletRequest;
 &nbsp;import jakarta.servlet.http.HttpServletResponse;
+&nbsp;import jakarta.servlet.http.HttpSession;
 &nbsp;import model.disponibilita.Disponibilita;
 &nbsp;import model.disponibilita.DisponibilitaDAO;
 &nbsp;import model.medico.Medico;
 &nbsp;import model.medico.MedicoDAO;
 &nbsp;import model.prenotazione.Prenotazione;
 &nbsp;import model.prenotazione.PrenotazioneDAO;
+&nbsp;import model.utente.Utente;
 &nbsp;
 &nbsp;import java.io.IOException;
 &nbsp;import java.util.List;
@@ -117,7 +119,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    public void doPost(HttpServletRequest request, HttpServletResponse response)
 &nbsp;            throws ServletException, IOException {
 &nbsp;
-&nbsp;        // Recupera i dati della prenotazione dalla richiesta
+&nbsp;
+<b class="fc">&nbsp;        HttpSession session = request.getSession(false);</b>
+<b class="fc">&nbsp;        if (session == null) {</b>
+<b class="nc">&nbsp;            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, &quot;Sessione non valida.&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Utente utente = (Utente) session.getAttribute(&quot;utente&quot;);</b>
+<b class="fc">&nbsp;        if (utente == null) {</b>
+<b class="nc">&nbsp;            RequestDispatcher dispatcher = request.getRequestDispatcher(&quot;/login.jsp&quot;);</b>
+<b class="nc">&nbsp;            dispatcher.forward(request, response);</b>
+&nbsp;        }
+&nbsp;
 <b class="fc">&nbsp;        String nota = request.getParameter(&quot;nota&quot;);</b>
 <b class="fc">&nbsp;        int idPaziente = Integer.parseInt(request.getParameter(&quot;idPaziente&quot;));</b>
 <b class="fc">&nbsp;        int idDisponibilita = Integer.parseInt(request.getParameter(&quot;idDisponibilita&quot;));</b>
@@ -180,7 +193,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-06 11:54</div>
+    <div style="float:right;">generated on 2025-01-06 18:45</div>
 </div>
 </body>
 </html>
