@@ -68,7 +68,7 @@ public class Disponibilita {
      * Imposta l'orario di inizio della disponibilità.
      *
      * @param oraIn l'orario di inizio nel formato "HH:mm:ss".
-     * @pre oraIn deve essere un orario valido nel formato "HH:mm:ss".
+     * precondizione: oraIn deve essere un orario valido nel formato "HH:mm:ss".
      */
     public void setOraIn(String oraIn) {
         this.oraIn = oraIn;
@@ -87,7 +87,7 @@ public class Disponibilita {
      * Imposta l'orario di fine della disponibilità.
      *
      * @param oraFi l'orario di fine nel formato "HH:mm".
-     * @pre oraFi deve essere un orario valido nel formato "HH:mm".
+     * precondizione oraFi deve essere un orario valido nel formato "HH:mm".
      */
     public void setOraFi(String oraFi) {
         this.oraFi = oraFi;

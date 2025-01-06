@@ -46,8 +46,11 @@
         <hr>
 
         <div class="lc_bot_register">
-        <p>Non hai ancora un account?</p> <a href="workInProgress.jsp"> Registrati!</a>
+            <p>Non hai ancora un account?</p> <a href="workInProgress.jsp"> Registrati!</a> <br>
         </div>
+
+        <p class="privacy"> Accedendo acconsenti ai nostri <a href="workInProgress.jsp">Termini e Condizioni</a> e
+            confermi di aver letto e compreso la nostra <a href="workInProgress.jsp">Privacy Policy</a>. </p>
 
     </div>
 

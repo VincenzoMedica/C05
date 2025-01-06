@@ -186,6 +186,7 @@ hr {
     display: flex;
     align-self: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .lc_bot_register p {
@@ -195,6 +196,15 @@ hr {
 
 .lc_bot_register a {
     padding-left: 6px;
+}
+
+.privacy {
+    font-size: 12px;
+    margin-top: 16px;
+}
+
+.privacy a {
+    padding-left: 0px;
 }
 
 .recap_prenotazioni {
@@ -537,3 +547,73 @@ hr {
     background-color: rgba(118, 171, 174, 0.81);
 }
 
+.faq_container {
+    display: flex;
+    justify-content: space-between; /* Spaziatura tra i due div */
+    gap: 16px; /* Spazio tra i due div */
+}
+
+.faq_p {
+    background-color: #008080;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    flex: 1; /* Ogni div occupa uno spazio uguale */
+    max-width: 50%; /* Limita la larghezza al 50% ciascuno */
+    margin-left: 16px;
+}
+
+.faq_p ol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faq_r {
+    background-color: #008080;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border-radius: 30px;
+    flex: 1; /* Ogni div occupa uno spazio uguale */
+    max-width: 50%; /* Limita la larghezza al 50% ciascuno */
+    margin-right: 16px;
+}
+
+.faq_p h2 {
+    align-self: center;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+.faq_r h2 {
+    align-self: center;
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+.faq_r ol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ol li h4 {
+    margin-bottom: 0px;
+}
+
+ol li p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
