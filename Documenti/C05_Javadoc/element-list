@@ -1,0 +1,11 @@
+controller.login
+controller.logout
+controller.medico
+controller.prenotazione
+controller.recensione
+model
+model.disponibilita
+model.medico
+model.prenotazione
+model.recensione
+model.utente

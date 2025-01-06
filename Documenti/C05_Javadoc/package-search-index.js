@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"controller.login"},{"l":"controller.logout"},{"l":"controller.medico"},{"l":"controller.prenotazione"},{"l":"controller.recensione"},{"l":"model"},{"l":"model.disponibilita"},{"l":"model.medico"},{"l":"model.prenotazione"},{"l":"model.recensione"},{"l":"model.utente"}];updateSearchResults();
