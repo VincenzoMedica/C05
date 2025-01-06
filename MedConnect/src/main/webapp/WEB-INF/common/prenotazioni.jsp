@@ -102,7 +102,7 @@
             </form>
         </div>
         <% } else if (esistenaRecensionePerPrenotazione.get(indice)) { %>
-
+    </div>
         <% } else { %>
 
         <button type="submit" name="idPrenotazione">
@@ -122,6 +122,7 @@
             }
         }
     %>
+
     <br><br><br>
     <c:choose>
         <c:when test="${not empty esito}">
@@ -130,7 +131,7 @@
             </p>
         </c:when>
         <c:otherwise>
-            <p>
+            <p class="not_p">
                 &nbsp;
             </p>
         </c:otherwise>
@@ -142,6 +143,5 @@
 
 </body>
 </html>
-
 
 <%@include file="/footer.jsp" %>
